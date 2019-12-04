@@ -1,13 +1,13 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using SearchInsertPositionTest;
 using SearchInsertPosition;
 
 namespace SearchInsertPositionTest
 {
-    [TestClass]
+    [TestFixture]
     public class UnitTest1
     {
-        [TestMethod]
+        [Test]
         public void TestMethod1()
         {
             int[] array = new int[4] { 1, 5, 6, 7 };
@@ -19,7 +19,7 @@ namespace SearchInsertPositionTest
             Assert.AreEqual(res, 0);
 
         }
-        [TestMethod]
+        [Test]
         public void TestMethod2()
         {
             int[] array = new int[4] { 4, 5, 6, 7 };
