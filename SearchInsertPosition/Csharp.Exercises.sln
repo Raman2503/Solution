@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sqrt", "Sqrt\Sqrt.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sqrt.Test", "Sqrt.Test\Sqrt.Test.csproj", "{B556A187-CA15-49EA-AA80-67410BB3D71C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReverseInteger.Test", "ReverseInteger.Test\ReverseInteger.Test.csproj", "{E0E71F9B-0222-4C76-BEC7-F7AECAAED1DE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{B556A187-CA15-49EA-AA80-67410BB3D71C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B556A187-CA15-49EA-AA80-67410BB3D71C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B556A187-CA15-49EA-AA80-67410BB3D71C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0E71F9B-0222-4C76-BEC7-F7AECAAED1DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0E71F9B-0222-4C76-BEC7-F7AECAAED1DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0E71F9B-0222-4C76-BEC7-F7AECAAED1DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0E71F9B-0222-4C76-BEC7-F7AECAAED1DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
