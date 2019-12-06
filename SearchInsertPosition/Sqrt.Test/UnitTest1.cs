@@ -1,14 +1,20 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
+using Sqrt;
+using Sqrt.Test;
 
 namespace Sqrt.Test
 {
-    [TestClass]
+    [TestFixture]
     public class UnitTest1
     {
-        [TestMethod]
+        [Test]
         public void TestMethod1()
         {
+            Solution mySolution = new Solution();
+
+            int res = mySolution.MySqrt(16);
+
+            Assert.AreEqual(res,4);
         }
     }
 }

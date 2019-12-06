@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContainsDuplicates", "Conta
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sqrt", "Sqrt\Sqrt.csproj", "{5BE96D6D-E019-4078-BAC0-5C75CD24F4AE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sqrt.Test", "Sqrt.Test\Sqrt.Test.csproj", "{B556A187-CA15-49EA-AA80-67410BB3D71C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{5BE96D6D-E019-4078-BAC0-5C75CD24F4AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5BE96D6D-E019-4078-BAC0-5C75CD24F4AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5BE96D6D-E019-4078-BAC0-5C75CD24F4AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B556A187-CA15-49EA-AA80-67410BB3D71C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B556A187-CA15-49EA-AA80-67410BB3D71C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B556A187-CA15-49EA-AA80-67410BB3D71C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B556A187-CA15-49EA-AA80-67410BB3D71C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
