@@ -25,7 +25,8 @@ namespace ConsignmentShopUI
             InitializeComponent();
             SetupData();
 
-            itemsBinding.DataSource = store.Items.Where(x => x.Sold == false).ToList();
+
+            itemsBinding.DataSource = GetItemsNotSoldYet();
             itemsListbox.DataSource = itemsBinding;
 
             itemsListbox.DisplayMember = "Display";
@@ -43,6 +44,11 @@ namespace ConsignmentShopUI
             vendorListbox.DisplayMember = "Display";
             vendorListbox.ValueMember = "Display";
 
+        }
+
+        List<Item> GetItemsNotSoldYet()
+        {
+            return store.Items.Where(x => x.Sold == false).ToList();
         }
 
         private void SetupData()
@@ -71,24 +77,35 @@ namespace ConsignmentShopUI
 
         private void makePurchase_Click(object sender, EventArgs e)
         {
-            foreach (Item item in shoppingCartData)
-            {
-                item.Sold = true;
-                item.Owner.PaymentDue += (decimal)(item.Owner.Commission) * item.Price;
-                storeProfit +=  (1-(decimal)item.Owner.Commission) * item.Price;
+            var items = CalculateShareOfVendorStore();
 
-            }
-
-            shoppingCartData.Clear();
-
-            itemsBinding.DataSource = store.Items.Where(x => x.Sold == false).ToList();
+            // ui code
+            itemsBinding.DataSource = GetItemsNotSoldYet();
 
             storeProfitValue.Text = string.Format("${0}", storeProfit);
+
+            shoppingCartData.Clear();
 
 
             cartBinding.ResetBindings(false);
             itemsBinding.ResetBindings(false);
             vendorsBinding.ResetBindings(false);
+        }
+
+        List<Item> CalculateShareOfVendorStore()
+        {
+            // Calculate share of a vendor and store
+            foreach (Item item in shoppingCartData)
+            {
+                item.Sold = true;
+                item.Owner.PaymentDue += (decimal)(item.Owner.Commission) * item.Price;
+                storeProfit += (1 - (decimal)item.Owner.Commission) * item.Price;
+            }
+
+            // items sold should not appear in a shopping cart
+            shoppingCartData.Clear();
+
+            return shoppingCartData;
         }
     }
 }
