@@ -13,7 +13,9 @@ namespace ConsignmentShopUI
 {
     public partial class ConsignmentShop : Form
     {
-        private SetupData setupdata = new SetupData();
+		readonly SetupData setupData;
+
+		//private SetupData setupdata = new SetupData();
         Profits profit = new Profits();
 
         BindingSource itemsBinding = new BindingSource();
@@ -21,13 +23,15 @@ namespace ConsignmentShopUI
         BindingSource vendorsBinding = new BindingSource();
         
 
-        public ConsignmentShop()
+        public ConsignmentShop(SetupData pSetupData)
         {
-            InitializeComponent();
-            setupdata.GenerateData ();
+			this.setupData = pSetupData;
+
+			InitializeComponent();
+            setupData.GenerateData ();
 
 
-            itemsBinding.DataSource = setupdata.GetItemsNotSoldYet();
+            itemsBinding.DataSource = setupData.GetItemsNotSoldYet();
             itemsListbox.DataSource = itemsBinding;
 
             itemsListbox.DisplayMember = "Display";
@@ -39,7 +43,7 @@ namespace ConsignmentShopUI
             shoppingCartListbox.DisplayMember = "Display";
             shoppingCartListbox.ValueMember = "Display";
 
-            vendorsBinding.DataSource = setupdata.GetVendors();
+            vendorsBinding.DataSource = setupData.GetVendors();
             vendorListbox.DataSource = vendorsBinding;
 
             vendorListbox.DisplayMember = "Display";
@@ -62,7 +66,7 @@ namespace ConsignmentShopUI
             var items = profit.CalculateShareOfVendorStore();
 
             // ui code
-            itemsBinding.DataSource = setupdata.GetItemsNotSoldYet();
+            itemsBinding.DataSource = setupData.GetItemsNotSoldYet();
 
             storeProfitValue.Text = string.Format("${0}", profit.storeProfit);
 

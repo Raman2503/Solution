@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using ConsignmentShopLibrary;
+
 namespace ConsignmentShopUI
 {
     static class Program
@@ -16,7 +18,13 @@ namespace ConsignmentShopUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ConsignmentShop());
+
+
+			var setupData = new SetupData();
+            
+			var form = new ConsignmentShop(setupData);
+
+			Application.Run(form);
         }
     }
 }
