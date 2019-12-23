@@ -3,16 +3,16 @@
 using Examples;
 using Examples.BusinessLogic;
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
 using Moq;
+
+using NUnit.Framework;
 
 namespace ExampleTests
 {
-	[TestClass]
+	[TestFixture]
 	public class CalculatorTest
 	{
-		[TestMethod]
+		[Test]
 		public void TestMethod1()
 		{
 			// Arrange
