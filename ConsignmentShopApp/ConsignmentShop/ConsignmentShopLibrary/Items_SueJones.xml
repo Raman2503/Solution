@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+	<Item Title="A Tale of Two Cities">
+		<Description>A book about a revolution</Description>
+		<Price>3.80</Price>
+	</Item>
+	<Item Title="Harry Potter Book 1">
+		<Description>A book about a boy</Description>
+		<Price>5.20</Price>
+	</Item>
+</root>

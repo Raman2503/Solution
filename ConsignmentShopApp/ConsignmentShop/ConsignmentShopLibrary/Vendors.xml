@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+	<Owner FirstName="Bill">
+		<LastName>Smith</LastName>
+	</Owner>
+	<Owner FirstName="Sue">
+		<LastName>Jones</LastName>
+	</Owner>
+</root>

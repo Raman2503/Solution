@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<root>
+	<Item Title="Moby Dick">
+		<Description>A book about a whale</Description>
+		<Price>4.50</Price>
+	</Item>
+	<Item Title="Jane Eyre">
+		<Description>A book about a girl</Description>
+		<Price>1.50</Price>
+	</Item>
+</root>
+	
+	

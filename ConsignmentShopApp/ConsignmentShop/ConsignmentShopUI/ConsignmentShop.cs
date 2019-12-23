@@ -13,51 +13,57 @@ namespace ConsignmentShopUI
 {
     public partial class ConsignmentShop : Form
     {
-		readonly SetupData setupData;
 
-		//private SetupData setupdata = new SetupData();
         Profits profit = new Profits();
+		IDataSource dummy = new DummyData();
+		IDataSource xml = new XmlData();
 
         BindingSource itemsBinding = new BindingSource();
         BindingSource cartBinding = new BindingSource();
         BindingSource vendorsBinding = new BindingSource();
         
 
-        public ConsignmentShop(SetupData pSetupData)
+        public ConsignmentShop()
         {
-			this.setupData = pSetupData;
-
 			InitializeComponent();
-            setupData.GenerateData ();
-
-
-            itemsBinding.DataSource = setupData.GetItemsNotSoldYet();
-            itemsListbox.DataSource = itemsBinding;
-
-            itemsListbox.DisplayMember = "Display";
-            itemsListbox.ValueMember = "Display";
-
-            cartBinding.DataSource = profit.shoppingCartData;
-            shoppingCartListbox.DataSource = cartBinding;
-
-            shoppingCartListbox.DisplayMember = "Display";
-            shoppingCartListbox.ValueMember = "Display";
-
-            vendorsBinding.DataSource = setupData.GetVendors();
-            vendorListbox.DataSource = vendorsBinding;
-
-            vendorListbox.DisplayMember = "Display";
-            vendorListbox.ValueMember = "Display";
-
         }
+		private void loadData_Click(object sender, EventArgs e)
+		{
 
-        private void addToCart_Click(object sender, EventArgs e)
+			xml.LoadData();
+
+
+			itemsBinding.DataSource = xml.GetItemsNotSoldYet();
+			itemsListbox.DataSource = itemsBinding;
+
+			itemsListbox.DisplayMember = "Display";
+			itemsListbox.ValueMember = "Display";
+
+			vendorsBinding.DataSource = xml.GetVendors();
+			vendorListbox.DataSource = vendorsBinding;
+
+			vendorListbox.DisplayMember = "Display";
+			vendorListbox.ValueMember = "Display";
+
+
+
+			itemsBinding.ResetBindings(false);
+			vendorsBinding.ResetBindings(false);
+		}
+
+		private void addToCart_Click(object sender, EventArgs e)
         {
             Item selectedItem = (Item)itemsListbox.SelectedItem;
+			
+			cartBinding.DataSource = profit.shoppingCartData;
+			shoppingCartListbox.DataSource = cartBinding;
 
-            profit.shoppingCartData.Add(selectedItem);
+			shoppingCartListbox.DisplayMember = "Display";
+			shoppingCartListbox.ValueMember = "Display";
 
-            cartBinding.ResetBindings(false);
+			profit.shoppingCartData.Add(selectedItem);
+
+			cartBinding.ResetBindings(false);
 
         }
 
@@ -66,7 +72,7 @@ namespace ConsignmentShopUI
             var items = profit.CalculateShareOfVendorStore();
 
             // ui code
-            itemsBinding.DataSource = setupData.GetItemsNotSoldYet();
+            itemsBinding.DataSource = xml.GetItemsNotSoldYet();
 
             storeProfitValue.Text = string.Format("${0}", profit.storeProfit);
 
@@ -76,5 +82,6 @@ namespace ConsignmentShopUI
             itemsBinding.ResetBindings(false);
             vendorsBinding.ResetBindings(false);
         }
-    }
+
+	}
 }

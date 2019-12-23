@@ -20,9 +20,8 @@ namespace ConsignmentShopUI
             Application.SetCompatibleTextRenderingDefault(false);
 
 
-			var setupData = new SetupData();
-            
-			var form = new ConsignmentShop(setupData);
+         
+			var form = new ConsignmentShop();
 
 			Application.Run(form);
         }
