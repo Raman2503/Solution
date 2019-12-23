@@ -19,10 +19,14 @@ namespace ConsignmentShopUI
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            // composition root
+			//IDataSource dataSource = new DummyData();
+			IDataSource dataSource = new XmlData();
 
-         
-			var form = new ConsignmentShop();
 
+            var form = new ConsignmentShop(dataSource);
+
+            // run your logic
 			Application.Run(form);
         }
     }

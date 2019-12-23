@@ -40,12 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IDataSource.cs" />
+    <Compile Include="DataSource\DummyData.cs" />
+    <Compile Include="DataSource\IDataSource.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Profits.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Store.cs" />
     <Compile Include="Vendor.cs" />
+    <Compile Include="DataSource\XmlData.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Items_BillSmith.xml">
@@ -58,6 +60,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
