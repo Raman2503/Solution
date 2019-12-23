@@ -9,6 +9,8 @@ namespace ConsignmentShopLibrary
 	public interface IDataSource
 	{
 		void LoadData();
+
+		void SaveData(object data);
 		
 		List<Item> GetItemsNotSoldYet();
 

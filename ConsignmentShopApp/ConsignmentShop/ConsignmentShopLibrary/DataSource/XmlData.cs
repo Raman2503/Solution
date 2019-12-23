@@ -41,6 +41,11 @@ namespace ConsignmentShopLibrary
 			}
 		}
 
+		public void SaveData(object data)
+		{
+			throw new NotImplementedException();
+		}
+
 		List<Item> IDataSource.GetItemsNotSoldYet()
 		{
 			return store.Items.Where(x => x.Sold == false).ToList();
