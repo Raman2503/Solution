@@ -40,6 +40,14 @@
 			this.StorePayoutLable = new System.Windows.Forms.Label();
 			this.storeProfitValue = new System.Windows.Forms.Label();
 			this.loadData = new System.Windows.Forms.Button();
+			this.addNewStoreItem = new System.Windows.Forms.Button();
+			this.titleTextBox = new System.Windows.Forms.TextBox();
+			this.titleTextBoxLabel = new System.Windows.Forms.Label();
+			this.priceTextBoxLabel = new System.Windows.Forms.Label();
+			this.priceTextBox = new System.Windows.Forms.TextBox();
+			this.vendorTextBoxLabel = new System.Windows.Forms.Label();
+			this.vendorFirstNameTextBox = new System.Windows.Forms.TextBox();
+			this.vendorLastNameTextBox = new System.Windows.Forms.TextBox();
 			this.SuspendLayout();
 			// 
 			// headerText
@@ -159,11 +167,84 @@
 			this.loadData.UseVisualStyleBackColor = true;
 			this.loadData.Click += new System.EventHandler(this.loadData_Click);
 			// 
+			// addNewStoreItem
+			// 
+			this.addNewStoreItem.Location = new System.Drawing.Point(581, 503);
+			this.addNewStoreItem.Name = "addNewStoreItem";
+			this.addNewStoreItem.Size = new System.Drawing.Size(113, 48);
+			this.addNewStoreItem.TabIndex = 13;
+			this.addNewStoreItem.Text = "Add new Store Item";
+			this.addNewStoreItem.UseVisualStyleBackColor = true;
+			this.addNewStoreItem.Click += new System.EventHandler(this.addNewStoreItem_Click);
+			// 
+			// titleTextBox
+			// 
+			this.titleTextBox.Location = new System.Drawing.Point(581, 557);
+			this.titleTextBox.Name = "titleTextBox";
+			this.titleTextBox.Size = new System.Drawing.Size(151, 26);
+			this.titleTextBox.TabIndex = 14;
+			// 
+			// titleTextBoxLabel
+			// 
+			this.titleTextBoxLabel.AutoSize = true;
+			this.titleTextBoxLabel.Location = new System.Drawing.Point(537, 560);
+			this.titleTextBoxLabel.Name = "titleTextBoxLabel";
+			this.titleTextBoxLabel.Size = new System.Drawing.Size(38, 20);
+			this.titleTextBoxLabel.TabIndex = 15;
+			this.titleTextBoxLabel.Text = "Title";
+			// 
+			// priceTextBoxLabel
+			// 
+			this.priceTextBoxLabel.AutoSize = true;
+			this.priceTextBoxLabel.Location = new System.Drawing.Point(531, 592);
+			this.priceTextBoxLabel.Name = "priceTextBoxLabel";
+			this.priceTextBoxLabel.Size = new System.Drawing.Size(44, 20);
+			this.priceTextBoxLabel.TabIndex = 17;
+			this.priceTextBoxLabel.Text = "Price";
+			// 
+			// priceTextBox
+			// 
+			this.priceTextBox.Location = new System.Drawing.Point(581, 589);
+			this.priceTextBox.Name = "priceTextBox";
+			this.priceTextBox.Size = new System.Drawing.Size(151, 26);
+			this.priceTextBox.TabIndex = 16;
+			// 
+			// vendorTextBoxLabel
+			// 
+			this.vendorTextBoxLabel.AutoSize = true;
+			this.vendorTextBoxLabel.Location = new System.Drawing.Point(735, 560);
+			this.vendorTextBoxLabel.Name = "vendorTextBoxLabel";
+			this.vendorTextBoxLabel.Size = new System.Drawing.Size(61, 20);
+			this.vendorTextBoxLabel.TabIndex = 19;
+			this.vendorTextBoxLabel.Text = "Vendor";
+			// 
+			// vendorFirstNameTextBox
+			// 
+			this.vendorFirstNameTextBox.Location = new System.Drawing.Point(797, 557);
+			this.vendorFirstNameTextBox.Name = "vendorFirstNameTextBox";
+			this.vendorFirstNameTextBox.Size = new System.Drawing.Size(87, 26);
+			this.vendorFirstNameTextBox.TabIndex = 18;
+			// 
+			// vendorLastNameTextBox
+			// 
+			this.vendorLastNameTextBox.Location = new System.Drawing.Point(890, 557);
+			this.vendorLastNameTextBox.Name = "vendorLastNameTextBox";
+			this.vendorLastNameTextBox.Size = new System.Drawing.Size(87, 26);
+			this.vendorLastNameTextBox.TabIndex = 20;
+			// 
 			// ConsignmentShop
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1092, 635);
+			this.Controls.Add(this.vendorLastNameTextBox);
+			this.Controls.Add(this.vendorTextBoxLabel);
+			this.Controls.Add(this.vendorFirstNameTextBox);
+			this.Controls.Add(this.priceTextBoxLabel);
+			this.Controls.Add(this.priceTextBox);
+			this.Controls.Add(this.titleTextBoxLabel);
+			this.Controls.Add(this.titleTextBox);
+			this.Controls.Add(this.addNewStoreItem);
 			this.Controls.Add(this.loadData);
 			this.Controls.Add(this.storeProfitValue);
 			this.Controls.Add(this.StorePayoutLable);
@@ -199,6 +280,14 @@
         private System.Windows.Forms.Label StorePayoutLable;
         private System.Windows.Forms.Label storeProfitValue;
 		private System.Windows.Forms.Button loadData;
+		private System.Windows.Forms.Button addNewStoreItem;
+		private System.Windows.Forms.Label titleTextBoxLabel;
+		private System.Windows.Forms.Label priceTextBoxLabel;
+		private System.Windows.Forms.Label vendorTextBoxLabel;
+		public System.Windows.Forms.TextBox titleTextBox;
+		public System.Windows.Forms.TextBox priceTextBox;
+		public System.Windows.Forms.TextBox vendorFirstNameTextBox;
+		public System.Windows.Forms.TextBox vendorLastNameTextBox;
 	}
 }
 

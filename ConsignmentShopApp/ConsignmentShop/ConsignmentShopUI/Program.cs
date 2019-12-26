@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 using ConsignmentShopLibrary;
 
 namespace ConsignmentShopUI
@@ -22,9 +21,10 @@ namespace ConsignmentShopUI
             // composition root
 			//IDataSource dataSource = new DummyData();
 			IDataSource dataSource = new XmlData();
+			Profits profit = new Profits();
+			NewStoreItems newItems = new NewStoreItems();
 
-
-            var form = new ConsignmentShop(dataSource);
+			var form = new ConsignmentShop(dataSource,profit,newItems);
 
             // run your logic
 			Application.Run(form);

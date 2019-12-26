@@ -11,7 +11,6 @@ namespace ConsignmentShopLibrary
 	public class XmlData : IDataSource
 	{
 		Store store = new Store();
-		Item Item = new Item();
 
 		public void LoadData()
 		{

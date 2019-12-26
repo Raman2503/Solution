@@ -10,7 +10,7 @@ namespace ConsignmentShopLibrary
 	{
 		void LoadData();
 
-		void SaveData(object data);
+		//void SaveData(object data);
 		
 		List<Item> GetItemsNotSoldYet();
 
