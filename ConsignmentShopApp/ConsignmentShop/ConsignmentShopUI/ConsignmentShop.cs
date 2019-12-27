@@ -17,6 +17,9 @@ namespace ConsignmentShopUI
 		readonly Profits profit;
 		readonly NewStoreItems newItems;
 
+		List<Vendor> vendors = new List<Vendor>();
+
+
 		BindingSource itemsBinding = new BindingSource();
 
 		BindingSource cartBinding = new BindingSource();
@@ -44,7 +47,9 @@ namespace ConsignmentShopUI
 			itemsListbox.DisplayMember = "Display";
 			itemsListbox.ValueMember = "Display";
 
-			vendorsBinding.DataSource = dataSource.GetVendors();
+			vendors = dataSource.GetVendors();
+
+			vendorsBinding.DataSource = vendors;
 			vendorListbox.DataSource = vendorsBinding;
 
 			vendorListbox.DisplayMember = "Display";
@@ -85,14 +90,16 @@ namespace ConsignmentShopUI
 
 		private void addNewStoreItem_Click(object sender, EventArgs e)
 		{
-			newItems.titleTextbox = this.titleTextBox;
-			newItems.priceTextbox = this.priceTextBox;
+			var newVendor = newItems.LoadNewVendors(vendorFirstNameTextBox.Text, vendorLastNameTextBox.Text);
+			vendors.Add(newVendor);
 
-			newItems.vendorFirstNameTextbox = this.vendorFirstNameTextBox;
-			newItems.vendorLastNameTextbox = this.vendorLastNameTextBox;
+			var newItem = newItems.LoadNewItems(
+				titleTextBox.Text, 
+				Convert.ToDecimal(priceTextBox.Text),
+				newVendor);
 
-			newItems.LoadNewVendors();
-			newItems.LoadNewItems();
+
+
 
 			itemsBinding.DataSource = newItems.GetItemsNotSoldYet();
 			itemsListbox.DataSource = itemsBinding;

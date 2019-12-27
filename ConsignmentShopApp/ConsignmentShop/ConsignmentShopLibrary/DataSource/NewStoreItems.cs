@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace ConsignmentShopLibrary 
 {
@@ -14,19 +13,16 @@ namespace ConsignmentShopLibrary
 		public List<Vendor> vendor = new List<Vendor>();
 
 
-		public TextBox titleTextbox;
-		public TextBox priceTextbox;
-		public TextBox vendorFirstNameTextbox;
-		public TextBox vendorLastNameTextbox;
 
-		public void LoadNewVendors()
+		public Vendor LoadNewVendors(string pVendorFirstName, string pVendorLastName)
 		{
-			store.Vendors.Add(new Vendor { FirstName = vendorFirstNameTextbox.Text, LastName = vendorLastNameTextbox.Text });
+			return new Vendor() { FirstName = pVendorFirstName, LastName = pVendorLastName };
 		}
 		
-		public void LoadNewItems()
+		public Item LoadNewItems(string pTitle, decimal pPrice, Vendor pVendor)
 		{
-			store.Items.Add(new Item { Title = titleTextbox.Text, Price = Convert.ToDecimal(priceTextbox.Text), Owner = store.Vendors.Last()});
+			return new Item { Title = pTitle, Price = pPrice, Owner = pVendor};
+			
 		}
 
 		public List<Item> GetItemsNotSoldYet()
