@@ -1,12 +1,8 @@
 ﻿using ConsignmentShopLibrary;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ConsignmentShopUI
@@ -16,14 +12,11 @@ namespace ConsignmentShopUI
 		readonly IDataSource dataSource;
 		readonly Profits profit;
 		readonly NewStoreItems newItems;
-
+		
 		List<Vendor> vendors = new List<Vendor>();
 
-
 		BindingSource itemsBinding = new BindingSource();
-
 		BindingSource cartBinding = new BindingSource();
-		
 		BindingSource vendorsBinding = new BindingSource();
 
 		public ConsignmentShop(IDataSource pDataSource, Profits pProfit, NewStoreItems pNewItems)
@@ -38,7 +31,6 @@ namespace ConsignmentShopUI
 
 		private void loadData_Click(object sender, EventArgs e)
 		{
-
 			dataSource.LoadData();
 
 			itemsBinding.DataSource = dataSource.GetItemsNotSoldYet();
@@ -54,7 +46,6 @@ namespace ConsignmentShopUI
 
 			vendorListbox.DisplayMember = "Display";
 			vendorListbox.ValueMember = "Display";
-
 		}
 
 		private void addToCart_Click(object sender, EventArgs e)
@@ -74,7 +65,7 @@ namespace ConsignmentShopUI
 
 		private void makePurchase_Click(object sender, EventArgs e)
 		{
-			var items = profit.CalculateShareOfVendorStore();
+			profit.CalculateShareOfVendorStore();
 
 			//itemsBinding.DataSource = dataSource.GetItemsNotSoldYet();
 			itemsBinding.DataSource = newItems.GetItemsNotSoldYet();
@@ -90,28 +81,25 @@ namespace ConsignmentShopUI
 
 		private void addNewStoreItem_Click(object sender, EventArgs e)
 		{
-			var newVendor = newItems.LoadNewVendors(vendorFirstNameTextBox.Text, vendorLastNameTextBox.Text);
-			vendors.Add(newVendor);
+			var newvdr = newItems.LoadNewVendors(vendorFirstNameTextBox.Text, vendorLastNameTextBox.Text);
+			vendors.Add(newvdr);
 
-			var newItem = newItems.LoadNewItems(
-				titleTextBox.Text, 
-				Convert.ToDecimal(priceTextBox.Text),
-				newVendor);
-
-
-
+			newItems.LoadNewItems(
+				 titleTextBox.Text,
+				 Convert.ToDecimal(priceTextBox.Text),
+				 newvdr);
 
 			itemsBinding.DataSource = newItems.GetItemsNotSoldYet();
 			itemsListbox.DataSource = itemsBinding;
 
-			itemsListbox.DisplayMember = "Display";
-			itemsListbox.ValueMember = "Display";
-
-			vendorsBinding.DataSource = newItems.GetVendors();
+			vendorsBinding.DataSource = vendors;
 			vendorListbox.DataSource = vendorsBinding;
 
 			vendorListbox.DisplayMember = "Display";
 			vendorListbox.ValueMember = "Display";
+
+			itemsListbox.DisplayMember = "Display";
+			itemsListbox.ValueMember = "Display";
 
 			itemsBinding.ResetBindings(false);
 			vendorsBinding.ResetBindings(false);

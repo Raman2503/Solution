@@ -17,5 +17,5 @@ namespace ConsignmentShopLibrary
            Vendors = new List<Vendor>();
            Items = new List<Item>();
         }
-    }
+	}
 }

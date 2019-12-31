@@ -24,7 +24,5 @@ namespace ConsignmentShopLibrary
         {
             Commission = 0.5;
         }
-
-
     }
 }
