@@ -12,7 +12,7 @@ namespace ConsignmentShopUI
 		readonly IDataSource dataSource;
 		readonly Profits profit;
 		readonly NewStoreItems newItems;
-		
+
 		List<Vendor> vendors = new List<Vendor>();
 
 		BindingSource itemsBinding = new BindingSource();
@@ -46,6 +46,9 @@ namespace ConsignmentShopUI
 
 			vendorListbox.DisplayMember = "Display";
 			vendorListbox.ValueMember = "Display";
+
+			itemsBinding.ResetBindings(false);
+			vendorsBinding.ResetBindings(false);
 		}
 
 		private void addToCart_Click(object sender, EventArgs e)
@@ -67,12 +70,18 @@ namespace ConsignmentShopUI
 		{
 			profit.CalculateShareOfVendorStore();
 
-			//itemsBinding.DataSource = dataSource.GetItemsNotSoldYet();
-			itemsBinding.DataSource = newItems.GetItemsNotSoldYet();
-
 			storeProfitValue.Text = string.Format("${0}", profit.storeProfit);
 
 			profit.shoppingCartData.Clear();
+
+			if (newItems.NewItemWasAdded == true)
+			{
+				itemsBinding.DataSource = newItems.GetItemsNotSoldYet();
+			}
+			else 
+			{
+				itemsBinding.DataSource = dataSource.GetItemsNotSoldYet();
+			}
 
 			cartBinding.ResetBindings(false);
 			itemsBinding.ResetBindings(false);

@@ -10,6 +10,8 @@ namespace ConsignmentShopLibrary
 	{
 		Store store = new Store();
 
+		public bool NewItemWasAdded { get; set; }
+
 		public Vendor LoadNewVendors(string pVendorFirstName, string pVendorLastName)
 		{
 			return new Vendor { FirstName = pVendorFirstName, LastName = pVendorLastName };
@@ -22,6 +24,7 @@ namespace ConsignmentShopLibrary
 
 		public List<Item> GetItemsNotSoldYet()
 		{
+			NewItemWasAdded = true;
 			return store.Items.Where(x => x.Sold == false).ToList();
 		}
 
