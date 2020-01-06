@@ -11,6 +11,7 @@ namespace ConsignmentShopLibrary
 	public class DummyData : IDataSource
 	{
 		Store store = new Store();
+		NewStoreItems newStoreItems = new NewStoreItems();
 
 		void IDataSource.LoadData()
 		{
@@ -32,6 +33,7 @@ namespace ConsignmentShopLibrary
 
 		List<Item> IDataSource.GetItemsNotSoldYet()
 		{
+			newStoreItems.NewItemWasAdded = false;
 			return store.Items.Where(x => x.Sold == false).ToList();
 		}
 

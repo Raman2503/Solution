@@ -11,6 +11,7 @@ namespace ConsignmentShopLibrary
 	public class XmlData : IDataSource
 	{
 		Store store = new Store();
+		NewStoreItems newStoreItems = new NewStoreItems();
 
 		public void LoadData()
 		{
@@ -46,6 +47,7 @@ namespace ConsignmentShopLibrary
 
 		List<Item> IDataSource.GetItemsNotSoldYet()
 		{
+			newStoreItems.NewItemWasAdded = false;	
 			return store.Items.Where(x => x.Sold == false).ToList();
 		}
 
