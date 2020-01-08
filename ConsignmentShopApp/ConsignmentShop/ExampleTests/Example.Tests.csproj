@@ -67,6 +67,7 @@
     <Compile Include="Interfaces\InterfacesTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitJsonTests.cs" />
+    <Compile Include="ReferenceTypesTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
