@@ -48,6 +48,7 @@
 			this.vendorTextBoxLabel = new System.Windows.Forms.Label();
 			this.vendorFirstNameTextBox = new System.Windows.Forms.TextBox();
 			this.vendorLastNameTextBox = new System.Windows.Forms.TextBox();
+			this.clearData = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// headerText
@@ -232,11 +233,22 @@
 			this.vendorLastNameTextBox.Size = new System.Drawing.Size(87, 26);
 			this.vendorLastNameTextBox.TabIndex = 20;
 			// 
+			// clearData
+			// 
+			this.clearData.Location = new System.Drawing.Point(169, 12);
+			this.clearData.Name = "clearData";
+			this.clearData.Size = new System.Drawing.Size(117, 31);
+			this.clearData.TabIndex = 21;
+			this.clearData.Text = "Clear Data";
+			this.clearData.UseVisualStyleBackColor = true;
+			this.clearData.Click += new System.EventHandler(this.clearData_Click);
+			// 
 			// ConsignmentShop
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1092, 635);
+			this.Controls.Add(this.clearData);
 			this.Controls.Add(this.vendorLastNameTextBox);
 			this.Controls.Add(this.vendorTextBoxLabel);
 			this.Controls.Add(this.vendorFirstNameTextBox);
@@ -288,6 +300,7 @@
 		public System.Windows.Forms.TextBox priceTextBox;
 		public System.Windows.Forms.TextBox vendorFirstNameTextBox;
 		public System.Windows.Forms.TextBox vendorLastNameTextBox;
+		private System.Windows.Forms.Button clearData;
 	}
 }
 

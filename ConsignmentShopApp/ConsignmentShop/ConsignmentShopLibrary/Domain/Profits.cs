@@ -16,7 +16,6 @@ namespace ConsignmentShopLibrary
                 item.Owner.PaymentDue += (decimal) item.Owner.Commission * item.Price;
                 storeProfit += (1 - (decimal) item.Owner.Commission) * item.Price;
             }
-
             shoppingCartData.Clear();
             return shoppingCartData;
         }

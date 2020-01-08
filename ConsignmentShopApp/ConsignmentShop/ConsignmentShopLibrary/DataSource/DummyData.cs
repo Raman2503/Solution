@@ -15,6 +15,9 @@ namespace ConsignmentShopLibrary
 
 		void IDataSource.LoadData()
 		{
+			store.Items.Clear();
+			store.Vendors.Clear();
+
 			store.Vendors.Add(new Vendor { FirstName = "Bill", LastName = "Smith" });
 			store.Vendors.Add(new Vendor { FirstName = "Sue", LastName = "Jones" });
 
@@ -33,7 +36,6 @@ namespace ConsignmentShopLibrary
 
 		List<Item> IDataSource.GetItemsNotSoldYet()
 		{
-			newStoreItems.NewItemWasAdded = false;
 			return store.Items.Where(x => x.Sold == false).ToList();
 		}
 
