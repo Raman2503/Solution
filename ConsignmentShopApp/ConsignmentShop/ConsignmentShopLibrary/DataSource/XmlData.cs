@@ -15,6 +15,9 @@ namespace ConsignmentShopLibrary
 
 		public void LoadData()
 		{
+			store.Items.Clear();
+			store.Vendors.Clear();
+
 			XmlDocument docItems = new XmlDocument();
 			XmlDocument docVendors = new XmlDocument();
 
@@ -47,7 +50,6 @@ namespace ConsignmentShopLibrary
 
 		List<Item> IDataSource.GetItemsNotSoldYet()
 		{
-			newStoreItems.NewItemWasAdded = false;	
 			return store.Items.Where(x => x.Sold == false).ToList();
 		}
 
@@ -55,6 +57,5 @@ namespace ConsignmentShopLibrary
 		{
 			return store.Vendors;
 		}
-
 	}
 }

@@ -10,23 +10,19 @@ namespace ConsignmentShopLibrary
 	{
 		Store store = new Store();
 
-		public bool NewItemWasAdded { get; set; }
-
 		public Vendor LoadNewVendors(string pVendorFirstName, string pVendorLastName)
 		{
 			return new Vendor { FirstName = pVendorFirstName, LastName = pVendorLastName };
 		}
 
-		public void LoadNewItems(string pTitle, decimal pPrice, Vendor pVendor)
+		public Item LoadNewItems(string pTitle, decimal pPrice, Vendor pVendor)
 		{
-			store.Items.Add( new Item { Title = pTitle, Price = pPrice, Owner = pVendor});
+			return new Item { Title = pTitle, Price = pPrice, Owner = pVendor};
 		}
 
 		public List<Item> GetItemsNotSoldYet()
 		{
-			NewItemWasAdded = true;
 			return store.Items.Where(x => x.Sold == false).ToList();
 		}
-
 	}
 }

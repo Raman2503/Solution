@@ -14,10 +14,16 @@ namespace ConsignmentShopUI
 		readonly NewStoreItems newItems;
 
 		List<Vendor> vendors = new List<Vendor>();
+		List<Item> items = new List<Item>();
 
 		BindingSource itemsBinding = new BindingSource();
 		BindingSource cartBinding = new BindingSource();
 		BindingSource vendorsBinding = new BindingSource();
+
+		BindingSource itemsBinding1 = new BindingSource();
+		BindingSource itemsBinding2 = new BindingSource();
+
+
 
 		public ConsignmentShop(IDataSource pDataSource, Profits pProfit, NewStoreItems pNewItems)
 		{
@@ -33,7 +39,9 @@ namespace ConsignmentShopUI
 		{
 			dataSource.LoadData();
 
-			itemsBinding.DataSource = dataSource.GetItemsNotSoldYet();
+			items = dataSource.GetItemsNotSoldYet();
+
+			itemsBinding.DataSource = items;
 			itemsListbox.DataSource = itemsBinding;
 
 			itemsListbox.DisplayMember = "Display";
@@ -41,7 +49,7 @@ namespace ConsignmentShopUI
 
 			vendors = dataSource.GetVendors();
 
-			vendorsBinding.DataSource = vendors;
+			vendorsBinding.DataSource = dataSource.GetVendors();
 			vendorListbox.DataSource = vendorsBinding;
 
 			vendorListbox.DisplayMember = "Display";
@@ -69,19 +77,12 @@ namespace ConsignmentShopUI
 		private void makePurchase_Click(object sender, EventArgs e)
 		{
 			profit.CalculateShareOfVendorStore();
-
 			storeProfitValue.Text = string.Format("${0}", profit.storeProfit);
 
 			profit.shoppingCartData.Clear();
 
-			if (newItems.NewItemWasAdded == true)
-			{
-				itemsBinding.DataSource = newItems.GetItemsNotSoldYet();
-			}
-			else 
-			{
-				itemsBinding.DataSource = dataSource.GetItemsNotSoldYet();
-			}
+			itemsBinding.DataSource = newItems.GetItemsNotSoldYet();
+			itemsBinding.DataSource = dataSource.GetItemsNotSoldYet();
 
 			cartBinding.ResetBindings(false);
 			itemsBinding.ResetBindings(false);
@@ -93,12 +94,13 @@ namespace ConsignmentShopUI
 			var newvdr = newItems.LoadNewVendors(vendorFirstNameTextBox.Text, vendorLastNameTextBox.Text);
 			vendors.Add(newvdr);
 
-			newItems.LoadNewItems(
+			var newitm = newItems.LoadNewItems(
 				 titleTextBox.Text,
 				 Convert.ToDecimal(priceTextBox.Text),
 				 newvdr);
+			items.Add(newitm);
 
-			itemsBinding.DataSource = newItems.GetItemsNotSoldYet();
+			itemsBinding.DataSource = items;
 			itemsListbox.DataSource = itemsBinding;
 
 			vendorsBinding.DataSource = vendors;
@@ -109,6 +111,20 @@ namespace ConsignmentShopUI
 
 			itemsListbox.DisplayMember = "Display";
 			itemsListbox.ValueMember = "Display";
+
+			itemsBinding.ResetBindings(false);
+			vendorsBinding.ResetBindings(false);
+
+			titleTextBox.Clear();
+			priceTextBox.Clear();
+			vendorFirstNameTextBox.Clear();
+			vendorLastNameTextBox.Clear();
+		}
+
+		private void clearData_Click(object sender, EventArgs e)
+		{
+			vendorsBinding.Clear();
+			itemsBinding.Clear();
 
 			itemsBinding.ResetBindings(false);
 			vendorsBinding.ResetBindings(false);
