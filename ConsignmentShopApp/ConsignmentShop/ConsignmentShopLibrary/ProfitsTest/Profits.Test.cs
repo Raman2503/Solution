@@ -12,7 +12,6 @@ namespace ProfitsTest
         {
             // Arrange 
             Profits profits = new Profits();
-            Item item  = new Item();
             Store store = new Store();
 
             store.Vendors.Add(new Vendor { FirstName = "Bill", LastName = "Smith" });
@@ -23,8 +22,8 @@ namespace ProfitsTest
             //Act
             var cartItems = profits.CalculateShareOfVendorStore();
 
-            // Assert
-            Assert.IsEmpty(cartItems);
+			// Assert
+			Assert.IsEmpty(cartItems);
         }
     }
 }
