@@ -9,6 +9,12 @@ namespace MyRefTypeExercises
 		public class IntegerValue
 		{
 			public int Val { get; set; } = 5;
+
+			public int ModifyValue(int Val)
+			{				
+				Val = 500;
+				return Val;
+			}
 		}
 
 		[TestMethod]
@@ -46,11 +52,29 @@ namespace MyRefTypeExercises
 			Assert.AreEqual(res, 200);
 		}
 
-	/*---------------------------------------------------------------------------------------
-	 ----------------------------------------------------------------------------------------
-	 ----------------------------------------------------------------------------------------*/
+		[TestMethod]
+		public void ChangeValueByFunctionTest()
+		{
+			IntegerValue int1 = new IntegerValue();
+			var val1 = 100;
+			//Call modifyValue method
+			int1.ModifyValue(val1);
 
-	public struct PersonDataStruct
+			// As a value type is used here, Val remains 100 even though the modifyValue method is called.
+			Assert.AreEqual(val1, 100);
+
+			// As a reference type is used now, Val is changed to 500 when calling the modifyValue method.
+			int1.Val = 100;
+			//Call modifyValue method
+			int1.Val = int1.ModifyValue(int1.Val);
+			Assert.AreEqual(int1.Val, 500);
+		}
+
+		/*---------------------------------------------------------------------------------------
+		 ----------------------------------------------------------------------------------------
+		 ----------------------------------------------------------------------------------------*/
+
+		public struct PersonDataStruct
 	{
 		public string Name { get; set; }
 		public int Age { get; set; }
