@@ -23,9 +23,7 @@ namespace ConsignmentShopUI
 		BindingSource itemsBinding1 = new BindingSource();
 		BindingSource itemsBinding2 = new BindingSource();
 
-
-
-		public ConsignmentShop(IDataSource pDataSource, Profits pProfit, NewStoreItems pNewItems)
+        public ConsignmentShop(IDataSource pDataSource, Profits pProfit, NewStoreItems pNewItems)
 		{
 			InitializeComponent();
 
@@ -81,8 +79,10 @@ namespace ConsignmentShopUI
 
 			profit.shoppingCartData.Clear();
 
-			itemsBinding.DataSource = newItems.GetItemsNotSoldYet();
-			itemsBinding.DataSource = dataSource.GetItemsNotSoldYet();
+            var itemsNotSold = dataSource.GetItemsNotSoldYet().Union(newItems.GetItemsNotSoldYet());
+
+            itemsBinding.DataSource = itemsNotSold;
+			//itemsBinding.DataSource = dataSource.GetItemsNotSoldYet();
 
 			cartBinding.ResetBindings(false);
 			itemsBinding.ResetBindings(false);
