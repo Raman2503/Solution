@@ -7,12 +7,17 @@ using System.Threading.Tasks;
 namespace Solitaire.Domain
 {
 	public class CardDeck
-	{
-		public List<Card> Cards { get; set; }
+    {
+        public List<Card> Cards { get; } = new List<Card>();
 
-		public CardDeck()
+
+		public int Count
+        {
+            get { return Cards.Count; }
+        }
+
+        public CardDeck()
 		{
-			Cards = new List<Card>();
 		}
 	}
 }
