@@ -52,7 +52,9 @@
   <ItemGroup>
     <Compile Include="CreateCardDeckTest.cs" />
     <Compile Include="DisplayCardTest.cs" />
+    <Compile Include="Playground.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StockTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Solitaire.Domain\Solitaire.Domain.csproj">

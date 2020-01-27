@@ -24,5 +24,5 @@ namespace Solitaire.Domain.Test
 				Console.WriteLine(card);
 			}
 		}
-	}
+    }
 }
