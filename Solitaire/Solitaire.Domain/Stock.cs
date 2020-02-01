@@ -12,12 +12,10 @@ namespace Solitaire.Domain
 		public List<Card> OpenCards { get; set; } = new List<Card>();
 		public List<Card> ClosedCards { get; set; } = new List<Card>();
 
-
 		/// <summary>
 		/// This property checks whether the stock pile is empty.
 		/// </summary>
 		public bool IsEmpty { get; set; }
-
 
 		public void Initialize(List<Card> initialCards)
 		{
@@ -36,8 +34,6 @@ namespace Solitaire.Domain
 			ClosedCards.RemoveRange(0,OpenCards.Count);
 			return ClosedCards;
 		}
-
-
 
 		public void DrawFromStock()
 		{

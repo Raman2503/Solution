@@ -15,9 +15,5 @@ namespace Solitaire.Domain
         {
             get { return Cards.Count; }
         }
-
-        public CardDeck()
-		{
-		}
 	}
 }
