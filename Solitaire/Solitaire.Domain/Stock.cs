@@ -42,6 +42,7 @@ namespace Solitaire.Domain
 		public void DrawFromStock()
 		{
 			OpenCards.Insert(0, (StockCards[1]));
+			ClosedCards.Remove(StockCards[1]);
 		}
 
 		public List<Card> CreateCompleteStock(List<Card> completeStock)
