@@ -9,8 +9,8 @@ namespace Solitaire.Domain
 	public class Stock
 	{
 		public List<Card> StockCards { get; } = new List<Card>();
-
 		public List<Card> OpenCards { get; set; } = new List<Card>();
+		public List<Card> ClosedCards { get; set; } = new List<Card>();
 
 
 		/// <summary>
@@ -30,6 +30,15 @@ namespace Solitaire.Domain
 			return OpenCards;
 		}
 
+		public List<Card> GetClosedCards()
+		{
+			ClosedCards.AddRange(StockCards);
+			ClosedCards.RemoveRange(0,OpenCards.Count);
+			return ClosedCards;
+		}
+
+
+
 		public void DrawFromStock()
 		{
 			OpenCards.Insert(0, (StockCards[1]));
@@ -40,5 +49,5 @@ namespace Solitaire.Domain
 			StockCards.AddRange(completeStock);
 			return StockCards;
 		}
-}
+	}
 }

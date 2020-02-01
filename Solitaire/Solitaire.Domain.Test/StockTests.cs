@@ -27,12 +27,15 @@ namespace Solitaire.Domain.Test
             stock.Initialize(initialCards);
 
             List<Card> openCards = stock.GetOpenCards();
+			List<Card> closedCards = stock.GetClosedCards();
 
             //Assert
             Assert.AreEqual(1, openCards.Count);
+			Assert.AreEqual(4, closedCards.Count);
             Assert.AreEqual(initialCards.First(), openCards.First());
+			Assert.AreEqual(initialCards[1], closedCards[0]);
+			Assert.AreEqual(initialCards.Last() , closedCards[3]); // may be edited
             Assert.IsFalse(stock.IsEmpty);
-
         }
 
         [TestMethod]
