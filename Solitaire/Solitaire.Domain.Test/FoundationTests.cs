@@ -39,12 +39,28 @@ namespace Solitaire.Domain.Test
 			//Act
 			foundation.Initialize(initialFoundationCards);
 
+			List<Card> openCards = foundation.GetOpenCards();
+
 			//Assert
 			Assert.IsFalse(foundation.IsEmpty);
+
 			Assert.AreEqual(foundation.FoundationPileClubs[0], initialFoundationCards[0]);
 			Assert.AreEqual(foundation.FoundationPileDiamonds[0], initialFoundationCards[1]);
 			Assert.AreEqual(foundation.FoundationPileHearts[0], initialFoundationCards[2]);
 			Assert.AreEqual(foundation.FoundationPileSpades[0], initialFoundationCards[3]);
+
+			Assert.AreEqual(4,openCards.Count);
+			foreach (Card card in openCards)
+			{
+				Console.WriteLine(card.ToString());
+			}
+			Assert.AreEqual(initialFoundationCards[0], openCards[0]);
+			Assert.AreEqual(initialFoundationCards[1], openCards[1]);
+			Assert.AreEqual(initialFoundationCards[2], openCards[2]);
+			Assert.AreEqual(initialFoundationCards[3], openCards[3]);
+
+
+			Assert.AreEqual(0, foundation.ClosedCards.Count);
 		}
 	}
 }

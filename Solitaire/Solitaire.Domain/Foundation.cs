@@ -25,12 +25,28 @@ namespace Solitaire.Domain
 		{
 			FoundationCards.AddRange(initialFoundationCards);
 
+
 			FoundationPileClubs.Add(FoundationCards[0]);
 			FoundationPileDiamonds.Add(FoundationCards[1]);
 			FoundationPileHearts.Add(FoundationCards[2]);
 			FoundationPileSpades.Add(FoundationCards[3]);
 
 			IsEmpty = false;
+		}
+
+		public List<Card> GetOpenCards()
+		{
+			OpenCards.Add(FoundationPileClubs.Last());
+			OpenCards.Add(FoundationPileDiamonds.Last());
+			OpenCards.Add(FoundationPileHearts.Last());
+			OpenCards.Add(FoundationPileSpades.Last());
+
+			return OpenCards;
+		}
+
+		public List<Card> GetClosedCards()
+		{
+			return ClosedCards;
 		}
 	}
 }
