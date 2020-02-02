@@ -15,7 +15,7 @@ namespace Solitaire.Domain
 		/// <summary>
 		/// This property checks whether the stock pile is empty.
 		/// </summary>
-		public bool IsEmpty { get; set; }
+		public bool IsEmpty { get; set; } = false;
 
 		public void Initialize(List<Card> initialCards)
 		{
