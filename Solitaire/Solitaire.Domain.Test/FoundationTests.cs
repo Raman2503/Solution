@@ -62,5 +62,40 @@ namespace Solitaire.Domain.Test
 
 			Assert.AreEqual(0, foundation.ClosedCards.Count);
 		}
+
+		[TestMethod]
+		/// <summary>
+		/// This test checks that cards that shall be moved to one of the foundation piles, have the correct
+		///	Rank and Suit.
+		/// <summary>
+		public void MoveCardToFoundationTest()
+		{
+			//Arrange
+			Foundation foundation = new Foundation();
+
+			List<Card> initialFoundationCards = new List<Card>()
+			{
+				new Card(Rank.Ace, Suit.Clubs),
+				new Card(Rank.Ace, Suit.Diamonds),
+				new Card(Rank.Ace, Suit.Hearts),
+				new Card(Rank.Ace, Suit.Spades),
+			};
+
+			Card nextCard = new Card(Rank.Two, Suit.Hearts);
+
+			//Act
+			foundation.Initialize(initialFoundationCards);
+
+			foundation.MoveCardToFoundation(nextCard);
+
+			//Assert
+			Assert.AreEqual(2, foundation.FoundationPileHearts.Count);
+			Assert.AreEqual(nextCard, foundation.FoundationPileHearts[1]);
+
+			foreach (Card card in foundation.FoundationPileHearts)
+			{
+				Console.WriteLine(card.ToString());
+			}
+		}
 	}
 }
