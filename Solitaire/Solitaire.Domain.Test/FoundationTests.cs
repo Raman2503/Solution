@@ -53,8 +53,11 @@ namespace Solitaire.Domain.Test
 		/// This test checks that cards that shall be moved to one of the foundation piles, have the correct
 		///	Rank and Suit.
 		/// <summary>
-		[TestCaseSource(nameof(MoveCardToFoundationTestCases))]
-		public void MoveCardToFoundationTest(Card newCard)
+		[TestCaseSource(nameof(MoveCardToFoundationTestCase))]
+		public void MoveCardToFoundationTest(Card newCardHearts, 
+											 Card newCardSpades,
+											 Card newCardDiamonds, 
+											 Card newCardClubs)
 		{
 			//Arrange
 			Foundation foundation = new Foundation();
@@ -62,31 +65,32 @@ namespace Solitaire.Domain.Test
 			List<Card> initialFoundationCards = new List<Card>()
 			{
 				new Card(Rank.Ace, Suit.Clubs),
-				new Card(Rank.Ace, Suit.Diamonds),
+				new Card(Rank.Jack, Suit.Diamonds),
 				new Card(Rank.Ace, Suit.Hearts),
-				new Card(Rank.Ace, Suit.Spades),
+				new Card(Rank.Nine, Suit.Spades),
 			};
 
 			//Act
 			foundation.Initialize(initialFoundationCards);
 
-			foundation.MoveCardToFoundation(newCard);
+			foundation.MoveCardToFoundation(newCardHearts, newCardSpades, newCardDiamonds, newCardClubs);
 
 			//Assert
 
-			Assert.AreEqual(2, foundation.FoundationPileHearts.Count);
-
-			Assert.AreEqual(newCard, foundation.FoundationPileHearts[1]);
+			Assert.AreEqual(newCardHearts, foundation.FoundationPileHearts[1]);
+			Assert.AreEqual(newCardSpades, foundation.FoundationPileSpades[1]);
+			Assert.AreEqual(newCardDiamonds, foundation.FoundationPileDiamonds[1]);
+			Assert.AreEqual(newCardClubs, foundation.FoundationPileClubs[1]);
 		}
 
 
-		static object[] MoveCardToFoundationTestCases =
+		static object[] MoveCardToFoundationTestCase =
 		{
-
-		   new object[]
-		   {
-					new Card(Rank.Two, Suit.Hearts)
-		   }
+		   new object[] { new Card(Rank.Two, Suit.Hearts),
+						  new Card(Rank.Ten, Suit.Spades),
+						  new Card(Rank.Queen, Suit.Diamonds),
+						  new Card(Rank.Two, Suit.Clubs)
+						},
 		};
 
 	}

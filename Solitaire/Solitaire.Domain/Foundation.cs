@@ -21,34 +21,34 @@ namespace Solitaire.Domain
 
 		public void Initialize(List<Card> initialFoundationCards)
 		{
-			if(initialFoundationCards[0].Rank==Rank.Ace)
 			FoundationPileClubs.Add(initialFoundationCards[0]);
 
-			if (initialFoundationCards[1].Rank == Rank.Ace)
 			FoundationPileDiamonds.Add(initialFoundationCards[1]);
 
-			if (initialFoundationCards[2].Rank == Rank.Ace)
 			FoundationPileHearts.Add(initialFoundationCards[2]);
 
-			if (initialFoundationCards[3].Rank == Rank.Ace)
 			FoundationPileSpades.Add(initialFoundationCards[3]);
 
 			IsEmpty = false;
 		}
 
-		public void MoveCardToFoundation(Card nextCard)
+		public void MoveCardToFoundation(Card nextCardHearts, 
+										 Card newCardSpades, 
+										 Card newCardDiamonds, 
+										 Card newCardClubs)
 		{
-			if (nextCard.Rank - FoundationPileClubs.Last().Rank == 1 && nextCard.Suit == Suit.Clubs)
-				FoundationPileClubs.Add(nextCard);
+			 if (newCardClubs.Rank - FoundationPileClubs.Last().Rank == 1 && newCardClubs.Suit == Suit.Clubs)
+				FoundationPileClubs.Add(newCardClubs);
 
-			else if (nextCard.Rank - FoundationPileDiamonds.Last().Rank == 1 && nextCard.Suit == Suit.Diamonds)
-				FoundationPileDiamonds.Add(nextCard);
+			 if (newCardDiamonds.Rank - FoundationPileDiamonds.Last().Rank == 1 && newCardDiamonds.Suit == Suit.Diamonds)
+				FoundationPileDiamonds.Add(newCardDiamonds);
 
-			else if (nextCard.Rank - FoundationPileHearts.Last().Rank == 1 && nextCard.Suit == Suit.Hearts)
-				FoundationPileHearts.Add(nextCard);
+			 if (newCardSpades.Rank - FoundationPileSpades.Last().Rank == 1 && newCardSpades.Suit == Suit.Spades)
+				FoundationPileSpades.Add(newCardSpades);
 
-			else if (nextCard.Rank - FoundationPileSpades.Last().Rank == 1 && nextCard.Suit == Suit.Spades)
-				FoundationPileSpades.Add(nextCard);
+			 if (nextCardHearts.Rank - FoundationPileHearts.Last().Rank == 1 && nextCardHearts.Suit == Suit.Hearts)
+				FoundationPileHearts.Add(nextCardHearts);
+
 		}
 	}
 }
