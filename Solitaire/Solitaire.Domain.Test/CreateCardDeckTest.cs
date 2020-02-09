@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Solitaire.Domain.Test
 {
-	[TestClass]
+	[TestFixture]
 	public class CreateCardDeckTest
 	{
-		[TestMethod]
+		[Test]
 		// This tests checks, if card deck is created properly. All 52 cards are written on the console.
 		public void NumberOfCardsInDeckTest()
 		{

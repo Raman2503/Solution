@@ -12,8 +12,7 @@ namespace Solitaire.Domain
 		public List<Card> FoundationPileDiamonds { get; set; } = new List<Card>();
 		public List<Card> FoundationPileHearts { get; set; } = new List<Card>();
 		public List<Card> FoundationPileSpades { get; set; } = new List<Card>();
-		public List<Card> OpenCards { get; set; } = new List<Card>();
-		public List<Card> ClosedCards { get; set; } = new List<Card>();
+
 
 		/// <summary>
 		/// This property checks that all foundation piles are initially empty.
@@ -35,21 +34,6 @@ namespace Solitaire.Domain
 			FoundationPileSpades.Add(initialFoundationCards[3]);
 
 			IsEmpty = false;
-		}
-
-		public List<Card> GetOpenCards()
-		{
-			OpenCards.Add(FoundationPileClubs.Last());
-			OpenCards.Add(FoundationPileDiamonds.Last());
-			OpenCards.Add(FoundationPileHearts.Last());
-			OpenCards.Add(FoundationPileSpades.Last());
-
-			return OpenCards;
-		}
-
-		public List<Card> GetClosedCards()
-		{
-			return ClosedCards;
 		}
 
 		public void MoveCardToFoundation(Card nextCard)

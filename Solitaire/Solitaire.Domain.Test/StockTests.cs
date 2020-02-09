@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Solitaire.Domain.Test
 {
-    [TestClass]
+    [TestFixture]
     public class StockTests
     {
-        [TestMethod]
+        [Test]
         public void StockInitializeTest()
         {
             //Arrange
@@ -40,7 +40,7 @@ namespace Solitaire.Domain.Test
 			Assert.AreEqual(initialCards.Last() , closedCards[3]); // may be edited
         }
 
-        [TestMethod]
+        [Test]
         public void DrawNewCardTest()
         {
             //Arrange
@@ -72,7 +72,7 @@ namespace Solitaire.Domain.Test
 			Assert.AreEqual(initialCards.Last(), closedCards[2]);
         }
 
-		[TestMethod]
+		[Test]
 		// This test checks if the stock pile contains 24 cards and outputs the cards on the console.
 		public void CheckNumberOfCompleteCardsInStock()
 		{

@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Solitaire.Domain.Test
 {
-    [TestClass]
+    [TestFixture]
     public class DisplayCardTest
     {
-        [TestMethod]
+        [Test]
         public void CreateCardWithRankAndSuite()
         {
             Card card1 = new Card(Rank.Jack,Suit.Clubs);
@@ -18,7 +18,7 @@ namespace Solitaire.Domain.Test
             Console.WriteLine(card2.ToString());
         }
 
-        [TestMethod]
+        [Test]
         public void CreateCardWithInvalidValues()
         {
             Card card1 = new Card(Rank.King,Suit.Diamonds);
