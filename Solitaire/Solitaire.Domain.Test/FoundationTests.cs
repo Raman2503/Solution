@@ -1,16 +1,16 @@
-﻿using System;
+﻿using NUnit.Framework;
 using System.Collections.Generic;
-using NUnit.Framework;
+using System.Linq;
 
 namespace Solitaire.Domain.Test
 {
 	[TestFixture]
 	public class FoundationTests
 	{
-		[Test]
 		/// <summary>
 		/// This test checks, that all four foundation piles are empty at the very beginning.
 		/// <summary>
+		[Test]
 		public void FoundationInitialStateTest()
 		{
 			Foundation foundation = new Foundation();
@@ -18,34 +18,104 @@ namespace Solitaire.Domain.Test
 			Assert.IsTrue(foundation.IsEmpty);
 		}
 
-		[Test]
+
+		public IEnumerable<TestCaseData> FoundationInitializeTestCases
+		{
+			get
+			{
+				yield return new TestCaseData(
+					new List<Card>(),
+					true,
+					//clubs
+					new List<Card>(),
+					//hearts
+					new List<Card>(),
+					//diamonds
+					new List<Card>(),
+					//spades
+					new List<Card>()
+				).SetName("Empty case");
+
+				yield return new TestCaseData(
+					new List<Card>()
+					{
+						new Card(Rank.Ace, Suit.Clubs)
+					},
+					false,
+					//clubs
+					new List<Card>()
+						{new Card(Rank.Ace, Suit.Clubs)},
+					//hearts
+					new List<Card>(),
+					//diamonds
+					new List<Card>(),
+					//spades
+					new List<Card>()
+					).SetName("A single card case");
+
+				yield return new TestCaseData(
+					new List<Card>()
+					{
+						new Card(Rank.Ace, Suit.Clubs),
+						new Card(Rank.King, Suit.Clubs)
+					},
+					false,
+					new List<Card>(),
+					new List<Card>(),
+					new List<Card>(),
+					new List<Card>()
+				).SetName("A 2 cards, same pile case");
+
+
+				yield return new TestCaseData(
+					new List<Card>()
+					{
+						new Card(Rank.Ace, Suit.Clubs),
+						new Card(Rank.Ace, Suit.Diamonds),
+						new Card(Rank.Ace, Suit.Hearts),
+						new Card(Rank.Ace, Suit.Spades),
+					},
+					false,
+					new List<Card>(),
+					new List<Card>(),
+					new List<Card>(),
+					new List<Card>()
+				).SetName("A 4 card case");
+			}
+		}
+
+
 		/// <summary>
 		/// This test checks, that the first card to be placed on each pile has the rank Ace.
 		/// Also the test, ensures that the foundation is not empty anymore.
 		/// <summary>
-		public void FoundationInitializeTest()
+			[Test]
+		[TestCaseSource(nameof(FoundationInitializeTestCases))]
+		public void FoundationInitializeTest(
+			List<Card> initialFoundationCards, 
+			bool expectedIsEmpty,
+			List<Card> expectedClubs,
+			List<Card> expectedHearts,
+			List<Card> expectedDiamonds,
+			List<Card> expectedSpades
+			)
 		{
 			//Arrange
 			Foundation foundation = new Foundation();
-
-			List<Card> initialFoundationCards = new List<Card>()
-			{
-				new Card(Rank.Ace, Suit.Clubs),
-				new Card(Rank.Ace, Suit.Diamonds),
-				new Card(Rank.Ace, Suit.Hearts),
-				new Card(Rank.Ace, Suit.Spades),
-			};
-
+			
 			//Act
 			foundation.Initialize(initialFoundationCards);
+			
 
 			//Assert
-			Assert.IsFalse(foundation.IsEmpty);
+			Assert.AreEqual(expectedIsEmpty, foundation.IsEmpty);
 
-			Assert.AreEqual(foundation.FoundationPileClubs[0], initialFoundationCards[0]);
-			Assert.AreEqual(foundation.FoundationPileDiamonds[0], initialFoundationCards[1]);
-			Assert.AreEqual(foundation.FoundationPileHearts[0], initialFoundationCards[2]);
-			Assert.AreEqual(foundation.FoundationPileSpades[0], initialFoundationCards[3]);
+
+			CollectionAssert.AreEqual(expectedClubs, foundation.FoundationPileClubs);
+			CollectionAssert.AreEqual(expectedHearts, foundation.FoundationPileHearts);
+			CollectionAssert.AreEqual(expectedDiamonds, foundation.FoundationPileDiamonds);
+			CollectionAssert.AreEqual(expectedSpades, foundation.FoundationPileSpades);
+
 		}
 
 
@@ -53,45 +123,53 @@ namespace Solitaire.Domain.Test
 		/// This test checks that cards that shall be moved to one of the foundation piles, have the correct
 		///	Rank and Suit.
 		/// <summary>
-		[TestCaseSource(nameof(MoveCardToFoundationTestCase))]
-		public void MoveCardToFoundationTest(Card newCardHearts, 
-											 Card newCardSpades,
-											 Card newCardDiamonds, 
-											 Card newCardClubs)
+		[TestCaseSource(nameof(MoveCardToFoundationTestCases))]
+		public void MoveCardToFoundationTest(List<Card> initialCardsList, Card newCard)
 		{
 			//Arrange
 			Foundation foundation = new Foundation();
+			foundation.Initialize(initialCardsList);
 
-			List<Card> initialFoundationCards = new List<Card>()
-			{
-				new Card(Rank.Ace, Suit.Clubs),
-				new Card(Rank.Jack, Suit.Diamonds),
-				new Card(Rank.Ace, Suit.Hearts),
-				new Card(Rank.Nine, Suit.Spades),
-			};
 
 			//Act
-			foundation.Initialize(initialFoundationCards);
-
-			foundation.MoveCardToFoundation(newCardHearts, newCardSpades, newCardDiamonds, newCardClubs);
+			foundation.MoveCardToFoundation(newCard);
 
 			//Assert
+			Assert.AreEqual(newCard, foundation.FoundationPileHearts.Last());
+		}
 
-			Assert.AreEqual(newCardHearts, foundation.FoundationPileHearts[1]);
-			Assert.AreEqual(newCardSpades, foundation.FoundationPileSpades[1]);
-			Assert.AreEqual(newCardDiamonds, foundation.FoundationPileDiamonds[1]);
-			Assert.AreEqual(newCardClubs, foundation.FoundationPileClubs[1]);
+		public IEnumerable<TestCaseData> MoveCardToFoundationTestCases
+		{
+			get
+			{
+				yield return new TestCaseData(
+					new List<Card>()
+					{
+						new Card(Rank.Ace, Suit.Hearts),
+						new Card(Rank.Ten, Suit.Spades),
+						new Card(Rank.Queen, Suit.Diamonds),
+						new Card(Rank.Two, Suit.Clubs)
+					},
+					new Card(Rank.Two, Suit.Hearts)
+					).SetName("Test1");
+
+
+				
+				yield return new TestCaseData(
+					new List<Card>()
+					{
+						new Card(Rank.Ace, Suit.Hearts),
+						new Card(Rank.Ten, Suit.Spades),
+						new Card(Rank.Queen, Suit.Diamonds),
+						new Card(Rank.Two, Suit.Clubs)
+					},
+					new Card(Rank.King, Suit.Diamonds)
+				).SetName("Test2");
+				
+			}
 		}
 
 
-		static object[] MoveCardToFoundationTestCase =
-		{
-		   new object[] { new Card(Rank.Two, Suit.Hearts),
-						  new Card(Rank.Ten, Suit.Spades),
-						  new Card(Rank.Queen, Suit.Diamonds),
-						  new Card(Rank.Two, Suit.Clubs)
-						},
-		};
 
 	}
 }

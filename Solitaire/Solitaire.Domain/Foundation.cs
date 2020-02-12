@@ -17,37 +17,49 @@ namespace Solitaire.Domain
 		/// <summary>
 		/// This property checks that all foundation piles are initially empty.
 		/// </summary>
-		public bool IsEmpty { get; set; } = true;
+		public bool IsEmpty
+		{
+			get
+			{
+				if (FoundationPileClubs.Any())
+					return false;
+				if (FoundationPileHearts.Any())
+					return false;
+				if (FoundationPileDiamonds.Any())
+					return false;
+				if (FoundationPileSpades.Any())
+					return false;
+				return true;
+			}
+		}
 
 		public void Initialize(List<Card> initialFoundationCards)
 		{
-			FoundationPileClubs.Add(initialFoundationCards[0]);
-
-			FoundationPileDiamonds.Add(initialFoundationCards[1]);
-
-			FoundationPileHearts.Add(initialFoundationCards[2]);
-
-			FoundationPileSpades.Add(initialFoundationCards[3]);
-
-			IsEmpty = false;
+			foreach (var card in initialFoundationCards)
+			{
+				MoveCardToFoundation(card);
+			}
 		}
 
-		public void MoveCardToFoundation(Card nextCardHearts, 
-										 Card newCardSpades, 
-										 Card newCardDiamonds, 
-										 Card newCardClubs)
+		public void MoveCardToFoundation(Card card)
 		{
-			 if (newCardClubs.Rank - FoundationPileClubs.Last().Rank == 1 && newCardClubs.Suit == Suit.Clubs)
-				FoundationPileClubs.Add(newCardClubs);
-
-			 if (newCardDiamonds.Rank - FoundationPileDiamonds.Last().Rank == 1 && newCardDiamonds.Suit == Suit.Diamonds)
-				FoundationPileDiamonds.Add(newCardDiamonds);
-
-			 if (newCardSpades.Rank - FoundationPileSpades.Last().Rank == 1 && newCardSpades.Suit == Suit.Spades)
-				FoundationPileSpades.Add(newCardSpades);
-
-			 if (nextCardHearts.Rank - FoundationPileHearts.Last().Rank == 1 && nextCardHearts.Suit == Suit.Hearts)
-				FoundationPileHearts.Add(nextCardHearts);
+			switch (card.Suit)
+			{
+				case Suit.Clubs:
+					FoundationPileClubs.Add(card);
+					break;
+				case Suit.Diamonds:
+					FoundationPileDiamonds.Add(card);
+					break;
+				case Suit.Hearts:
+					FoundationPileHearts.Add(card);
+					break;
+				case Suit.Spades:
+					FoundationPileSpades.Add(card);
+					break;
+				default:
+					throw new ArgumentOutOfRangeException();
+			}
 
 		}
 	}
