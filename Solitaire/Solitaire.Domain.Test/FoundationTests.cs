@@ -111,10 +111,10 @@ namespace Solitaire.Domain.Test
 			Assert.AreEqual(expectedIsEmpty, foundation.IsEmpty);
 
 
-			CollectionAssert.AreEqual(expectedClubs, foundation.FoundationPileClubs);
-			CollectionAssert.AreEqual(expectedHearts, foundation.FoundationPileHearts);
-			CollectionAssert.AreEqual(expectedDiamonds, foundation.FoundationPileDiamonds);
-			CollectionAssert.AreEqual(expectedSpades, foundation.FoundationPileSpades);
+			CollectionAssert.AreEqual(expectedClubs.ToString(), foundation.FoundationPileClubs.ToString());
+			CollectionAssert.AreEqual(expectedHearts.ToString(), foundation.FoundationPileHearts.ToString());
+			CollectionAssert.AreEqual(expectedDiamonds.ToString(), foundation.FoundationPileDiamonds.ToString());
+			CollectionAssert.AreEqual(expectedSpades.ToString(), foundation.FoundationPileSpades.ToString());
 
 		}
 
