@@ -60,7 +60,11 @@ namespace Solitaire.Domain.Test
 						new Card(Rank.King, Suit.Clubs)
 					},
 					false,
-					new List<Card>(),
+					new List<Card>()
+					{
+						new Card(Rank.Ace, Suit.Clubs),
+						new Card(Rank.King, Suit.Clubs)
+					},
 					new List<Card>(),
 					new List<Card>(),
 					new List<Card>()
@@ -76,10 +80,10 @@ namespace Solitaire.Domain.Test
 						new Card(Rank.Ace, Suit.Spades),
 					},
 					false,
-					new List<Card>(),
-					new List<Card>(),
-					new List<Card>(),
-					new List<Card>()
+					new List<Card>{new Card(Rank.Ace, Suit.Clubs)},
+					new List<Card>{new Card(Rank.Ace, Suit.Hearts)},
+					new List<Card>{new Card(Rank.Ace, Suit.Diamonds)},
+					new List<Card>{new Card(Rank.Ace, Suit.Spades)}
 				).SetName("A 4 card case");
 			}
 		}
