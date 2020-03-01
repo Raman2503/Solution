@@ -123,25 +123,6 @@ namespace Solitaire.Domain.Test
 		}
 
 
-		/// <summary>
-		/// This test checks that cards that shall be moved to one of the foundation piles, have the correct
-		///	Rank and Suit.
-		/// <summary>
-		[TestCaseSource(nameof(MoveCardToFoundationTestCases))]
-		public void MoveCardToFoundationTest(List<Card> initialCardsList, Card newCard)
-		{
-			//Arrange
-			Foundation foundation = new Foundation();
-			foundation.Initialize(initialCardsList);
-
-
-			//Act
-			foundation.MoveCardToFoundation(newCard);
-
-			//Assert
-			Assert.AreEqual(newCard, foundation.FoundationPileHearts.Last());
-		}
-
 		public IEnumerable<TestCaseData> MoveCardToFoundationTestCases
 		{
 			get
@@ -154,26 +135,63 @@ namespace Solitaire.Domain.Test
 						new Card(Rank.Queen, Suit.Diamonds),
 						new Card(Rank.Two, Suit.Clubs)
 					},
-					new Card(Rank.Two, Suit.Hearts)
-					).SetName("Test1");
-
-
-				
-				yield return new TestCaseData(
-					new List<Card>()
-					{
-						new Card(Rank.Ace, Suit.Hearts),
-						new Card(Rank.Ten, Suit.Spades),
-						new Card(Rank.Queen, Suit.Diamonds),
-						new Card(Rank.Two, Suit.Clubs)
+					false,
+					new Card(Rank.Two, Suit.Hearts),
+					new List<Card> { new Card(Rank.Two, Suit.Clubs) },
+					new List<Card>
+					{ new Card(Rank.Ace, Suit.Hearts),
+					  new Card(Rank.Two, Suit.Hearts),
 					},
-					new Card(Rank.King, Suit.Diamonds)
-				).SetName("Test2");
-				
+					new List<Card> { new Card(Rank.Queen, Suit.Diamonds) },
+					new List<Card> { new Card(Rank.Ten, Suit.Spades) }
+					).SetName("Ranks match. Card Is Added");
+
+
+
+				yield return new TestCaseData(
+								new List<Card>()
+					{
+					new Card(Rank.Ace, Suit.Hearts),
+					new Card(Rank.Ten, Suit.Spades),
+					new Card(Rank.Queen, Suit.Diamonds),
+					new Card(Rank.Two, Suit.Clubs)
+					},
+					false,
+					new Card(Rank.Six, Suit.Spades),
+					new List<Card> { new Card(Rank.Two, Suit.Clubs) },
+					new List<Card> { new Card(Rank.Ace, Suit.Hearts) },
+					new List<Card> { new Card(Rank.Queen, Suit.Diamonds) },
+					new List<Card> { new Card(Rank.Ten, Suit.Spades)}
+					).SetName("Ranks do not match. No Card Added.");
 			}
 		}
+		/// <summary>
+		/// This test checks that cards that shall be moved to one of the foundation piles, have the correct
+		///	Rank and Suit.
+		/// <summary>
+		[TestCaseSource(nameof(MoveCardToFoundationTestCases))]
+		public void MoveCardToFoundationTest(
+			List<Card> initialFoundationCards,
+			bool expectedIsEmpty,
+			Card newCard,
+			List<Card> expectedClubs,
+			List<Card> expectedHearts,
+			List<Card> expectedDiamonds,
+			List<Card> expectedSpades)
+		{
+			//Arrange
+			Foundation foundation = new Foundation();
+			foundation.Initialize(initialFoundationCards);
 
 
+			//Act
+			foundation.CheckRank(newCard);
 
+			//Assert
+			CollectionAssert.AreEqual(expectedClubs, foundation.FoundationPileClubs);
+			CollectionAssert.AreEqual(expectedHearts, foundation.FoundationPileHearts);
+			CollectionAssert.AreEqual(expectedDiamonds, foundation.FoundationPileDiamonds);
+			CollectionAssert.AreEqual(expectedSpades, foundation.FoundationPileSpades);
+		}
 	}
 }

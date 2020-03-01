@@ -41,6 +41,32 @@ namespace Solitaire.Domain
 			}
 		}
 
+		public void CheckRank(Card newCard)
+		{
+			switch (newCard.Suit)
+			{
+				case Suit.Clubs:
+					if (newCard.Rank - FoundationPileClubs.Last().Rank == 1)
+						MoveCardToFoundation(newCard);
+					break;
+				case Suit.Diamonds:
+					if (newCard.Rank - FoundationPileDiamonds.Last().Rank == 1)
+						MoveCardToFoundation(newCard);
+					break;
+				case Suit.Hearts:
+					if (newCard.Rank - FoundationPileHearts.Last().Rank == 1)
+						MoveCardToFoundation(newCard);
+					break;
+				case Suit.Spades:
+					if (newCard.Rank - FoundationPileSpades.Last().Rank == 1)
+						MoveCardToFoundation(newCard);
+					break;
+				default:
+					throw new ArgumentOutOfRangeException();
+			}
+
+		}
+
 		public void MoveCardToFoundation(Card card)
 		{
 			switch (card.Suit)
