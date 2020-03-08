@@ -7,18 +7,6 @@ namespace Solitaire.Domain.Test
 	[TestFixture]
 	public class FoundationTests
 	{
-		/// <summary>
-		/// This test checks, that all four foundation piles are empty at the very beginning.
-		/// <summary>
-		[Test]
-		public void FoundationInitialStateTest()
-		{
-			Foundation foundation = new Foundation();
-
-			Assert.IsTrue(foundation.IsEmpty);
-		}
-
-
 		public IEnumerable<TestCaseData> FoundationInitializeTestCases
 		{
 			get
