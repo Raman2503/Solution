@@ -59,6 +59,7 @@
     <Compile Include="StockTests.cs" />
     <Compile Include="FoundationTests.cs" />
     <Compile Include="TableauTest.cs" />
+    <Compile Include="BoardTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Solitaire.Domain\Solitaire.Domain.csproj">
