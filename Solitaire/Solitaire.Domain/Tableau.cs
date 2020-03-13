@@ -26,7 +26,9 @@ namespace Solitaire.Domain
 		/// <param name="tableauPile"></param>
 		public void Initialize(List<Card> tableauPile)
 		{
-			if(tableauPile.Count == 1)
+			_ = tableauPile ?? throw new ArgumentNullException(nameof(tableauPile));
+
+			if (tableauPile.Count == 1)
 			{
 				TableauPile1.AddRange(tableauPile);
 			}
@@ -53,6 +55,10 @@ namespace Solitaire.Domain
 			if (tableauPile.Count == 7)
 			{
 				TableauPile7.AddRange(tableauPile);
+			}
+			else
+			{
+				return;
 			}
 
 			DetermineOpenCardOfPile(tableauPile);

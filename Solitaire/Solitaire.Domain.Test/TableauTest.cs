@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using System.Collections.Generic;
 
 
@@ -7,10 +8,63 @@ namespace Solitaire.Domain.Test
 	[TestFixture]
 	public class TableauTests
 	{
-		public System.Collections.Generic.IEnumerable<TestCaseData> TableauInitializeTestCases
+		public IEnumerable<TestCaseData> TableauInitializeTestCases
 		{
 			get
 			{
+				yield return new TestCaseData(
+					null,
+					// expected Pile 1
+					new List<Card>() { },
+					// expected Pile 2
+					new List<Card>() { },
+					// expected Pile 3
+					new List<Card>() { },
+					// expected Pile 4
+					new List<Card>() { },
+					// expected Pile 5
+					new List<Card>() { },
+					// expected Pile 6
+					new List<Card>() { },
+					// expected Pile 7
+					new List<Card>() { }
+				).SetName("Null case").Throws(typeof(ArgumentNullException));
+
+				yield return new TestCaseData(
+					new List<Card>() { },
+					// expected Pile 1
+					new List<Card>() { },
+					// expected Pile 2
+					new List<Card>() { },
+					// expected Pile 3
+					new List<Card>() { },
+					// expected Pile 4
+					new List<Card>() { },
+					// expected Pile 5
+					new List<Card>() { },
+					// expected Pile 6
+					new List<Card>() { },
+					// expected Pile 7
+					new List<Card>() { }
+				).SetName("Empty case");
+
+				yield return new TestCaseData(
+					   new List<Card>() { new Card(Rank.Ace, Suit.Diamonds) },
+					   // expected Pile 1
+					   new List<Card>() { new Card(Rank.Ace, Suit.Diamonds) },
+					   // expected Pile 2
+					   new List<Card>() { },
+					   // expected Pile 3
+					   new List<Card>() { },
+					   // expected Pile 4
+					   new List<Card>() { },
+					   // expected Pile 5
+					   new List<Card>() { },
+					   // expected Pile 6
+					   new List<Card>() { },
+					   // expected Pile 7
+					   new List<Card>() { }
+				   ).SetName("Pile 1 initialized");
 				yield return new TestCaseData(
 					new List<Card>() {new Card(Rank.Ace, Suit.Diamonds)},
 					// expected Pile 1
