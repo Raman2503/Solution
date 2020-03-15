@@ -63,11 +63,8 @@ namespace Solitaire.Domain
 				{
 					TableauPile7.AddRange(tableauPiles[6]);
 				}
-				else
-				{
-					return;
-				}
 			}
 		}
 	}
 }
+ 		

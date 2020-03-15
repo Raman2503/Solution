@@ -198,7 +198,7 @@ namespace Solitaire.Domain.Test
 		/// <summary>
 		/// This test checks, whether the the tableau is correctly initialized.
 		/// </summary>
-		/// <param name="initialTableauCards"></param>
+		/// <param name="initialTableauPiles"></param>
 		/// <param name="expectedPile1"></param>
 		/// <param name="expectedPile2"></param>
 		/// <param name="expectedPile3"></param>
@@ -234,6 +234,7 @@ namespace Solitaire.Domain.Test
 			CollectionAssert.AreEqual(expectedPile5, tableau.TableauPile5);
 			CollectionAssert.AreEqual(expectedPile6, tableau.TableauPile6);
 			CollectionAssert.AreEqual(expectedPile7, tableau.TableauPile7);
+
 		}
 	}
 }
