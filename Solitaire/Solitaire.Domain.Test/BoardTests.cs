@@ -59,7 +59,7 @@ namespace Solitaire.Domain.Test
 						new List<Card>() { },
 						new List<Card>() { }
 					},
-						false,
+						true,
 						new List<Card> { },
 						new List<Card> { },
 						new List<Card>()
@@ -81,7 +81,7 @@ namespace Solitaire.Domain.Test
 						new List<Card> { }
 				).SetName("Card Can Be Moved");
 
-				// Move Card from normal pile to another pile
+				// Card cannot be moved because rank is wrong
 				yield return new TestCaseData(
 					new List<List<Card>>()
 					{
@@ -91,7 +91,7 @@ namespace Solitaire.Domain.Test
 						{
 							new Card(Rank.Ace, Suit.Spades),
 							new Card(Rank.Five, Suit.Clubs),
-							new Card(Rank.Five, Suit.Spades),
+							new Card(Rank.Jack, Suit.Spades),
 						},
 						new List<Card>() { },
 						new List<Card>()
@@ -112,7 +112,7 @@ namespace Solitaire.Domain.Test
 					{
 						new Card(Rank.Ace, Suit.Spades),
 						new Card(Rank.Five, Suit.Clubs),
-						new Card(Rank.Eight, Suit.Spades),
+						new Card(Rank.Jack, Suit.Spades),
 					},
 					new List<Card> { },
 					new List<Card>
@@ -121,11 +121,57 @@ namespace Solitaire.Domain.Test
 						new Card(Rank.Nine, Suit.Spades),
 						new Card(Rank.Two, Suit.Diamonds),
 						new Card(Rank.Six, Suit.Diamonds),
-						new Card(Rank.Six, Suit.Hearts),
+						new Card(Rank.Six, Suit.Hearts)
 					},
 					new List<Card> { },
 					new List<Card> { }
-				).SetName("Card Cannot Be Moved");
+				).SetName("Card Cannot Be Moved: Wrong Rank");
+
+				// Card cannot be moved because rank is wrong
+				yield return new TestCaseData(
+					new List<List<Card>>()
+					{
+						new List<Card>() { },
+						new List<Card>() { },
+						new List<Card>()
+						{
+							new Card(Rank.Ace, Suit.Spades),
+							new Card(Rank.Five, Suit.Clubs),
+							new Card(Rank.Five, Suit.Diamonds),
+						},
+						new List<Card>() { },
+						new List<Card>()
+						{
+							new Card(Rank.King, Suit.Diamonds),
+							new Card(Rank.Nine, Suit.Spades),
+							new Card(Rank.Two, Suit.Diamonds),
+							new Card(Rank.Six, Suit.Diamonds),
+							new Card(Rank.Six, Suit.Hearts)
+						},
+						new List<Card>() { },
+						new List<Card>() { }
+					},
+					false,
+					new List<Card> { },
+					new List<Card> { },
+					new List<Card>()
+					{
+						new Card(Rank.Ace, Suit.Spades),
+						new Card(Rank.Five, Suit.Clubs),
+						new Card(Rank.Five, Suit.Diamonds),
+					},
+					new List<Card> { },
+					new List<Card>
+					{
+						new Card(Rank.King, Suit.Diamonds),
+						new Card(Rank.Nine, Suit.Spades),
+						new Card(Rank.Two, Suit.Diamonds),
+						new Card(Rank.Six, Suit.Diamonds),
+						new Card(Rank.Six, Suit.Hearts)
+					},
+					new List<Card> { },
+					new List<Card> { }
+				).SetName("Card Cannot Be Moved: Wrong Suit");
 			}
 		}
 
@@ -151,6 +197,7 @@ namespace Solitaire.Domain.Test
 			tableau.CheckRankAndSuitInTableau(initialTableauPiles);
 			
 			//Assert
+			Assert.AreEqual(tableau.CardCanBeMoved, pCardCanBeMoved);
 			CollectionAssert.AreEqual(expectedPile3, tableau.TableauPile3);
 			CollectionAssert.AreEqual(expectedPile5, tableau.TableauPile5);
 

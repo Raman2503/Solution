@@ -14,6 +14,8 @@ namespace Solitaire.Domain
 		public List<Card> TableauPile6 { get; set; } = new List<Card>();
 		public List<Card> TableauPile7 { get; set; } = new List<Card>();
 
+		public bool CardCanBeMoved { get; set; }
+
 
 		/// <summary>
 		/// This method initializes the respective pile on the tableau, if the associated number of cards
@@ -73,7 +75,7 @@ namespace Solitaire.Domain
 
 				TableauPile3 = pPile3;
 				TableauPile5 = pPile5;
-				//CardCanBeMoved = true;
+				CardCanBeMoved = true;
 			}
 		}
 
@@ -88,14 +90,18 @@ namespace Solitaire.Domain
 				var cardToBeMoved = pile3.Last();
 				var openCardFromTargetPile = pile5.Last();
 
-				if (cardToBeMoved.IsBlack && openCardFromTargetPile.IsRed ||
+				if (openCardFromTargetPile.Rank - cardToBeMoved.Rank == 1)
+				{
+					if (cardToBeMoved.IsBlack && openCardFromTargetPile.IsRed ||
 					cardToBeMoved.IsRed && openCardFromTargetPile.IsBlack)
 				{
-					if (openCardFromTargetPile.Rank - cardToBeMoved.Rank == 1)
-					{
+					
 						MoveCardFromTableauToTableau(pile3, pile5, cardToBeMoved);
-					}
 				}
+					
+				}
+				else
+					return;
 			}
 		}
 
