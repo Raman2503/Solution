@@ -68,15 +68,14 @@ namespace Solitaire.Domain
 
 		public void MoveCardFromTableauToTableau(List<Card> pPile3, List<Card> pPile5, Card pCardToBeMoved)
 		{
-			if (pPile3.Any() || pPile5.Any())
-			{
+			
 				pPile5.Add(pCardToBeMoved);
 				pPile3.Remove(pCardToBeMoved);
 
 				TableauPile3 = pPile3;
 				TableauPile5 = pPile5;
 				CardCanBeMoved = true;
-			}
+			
 		}
 
 
@@ -87,21 +86,24 @@ namespace Solitaire.Domain
 				var pile3 = initialTableauPiles[2];
 				var pile5 = initialTableauPiles[4];
 
-				var cardToBeMoved = pile3.Last();
-				var openCardFromTargetPile = pile5.Last();
+				if(pile5.Any() && pile3.Any())
+				{
+					var cardToBeMoved = pile3.Last();
+					var openCardFromTargetPile = pile5.Last();
 
-				if (openCardFromTargetPile.Rank - cardToBeMoved.Rank == 1)
-				{
-					if (cardToBeMoved.IsBlack && openCardFromTargetPile.IsRed ||
-					cardToBeMoved.IsRed && openCardFromTargetPile.IsBlack)
-				{
-					
-						MoveCardFromTableauToTableau(pile3, pile5, cardToBeMoved);
+					if (openCardFromTargetPile.Rank - cardToBeMoved.Rank == 1)
+					{
+						if (cardToBeMoved.IsBlack && openCardFromTargetPile.IsRed ||
+						    cardToBeMoved.IsRed && openCardFromTargetPile.IsBlack)
+						{
+
+							MoveCardFromTableauToTableau(pile3, pile5, cardToBeMoved);
+						}
+
+					}
+					else
+						return;
 				}
-					
-				}
-				else
-					return;
 			}
 		}
 

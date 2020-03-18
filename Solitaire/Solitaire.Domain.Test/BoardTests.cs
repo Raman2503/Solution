@@ -172,6 +172,85 @@ namespace Solitaire.Domain.Test
 					new List<Card> { },
 					new List<Card> { }
 				).SetName("Card Cannot Be Moved: Wrong Suit");
+
+				yield return new TestCaseData(
+					new List<List<Card>>()
+					{
+						new List<Card>() { },
+						new List<Card>() { },
+						new List<Card>()
+						{
+
+						},
+						new List<Card>() { },
+						new List<Card>()
+						{
+							new Card(Rank.King, Suit.Diamonds),
+							new Card(Rank.Nine, Suit.Spades),
+							new Card(Rank.Two, Suit.Diamonds),
+							new Card(Rank.Six, Suit.Diamonds),
+							new Card(Rank.Six, Suit.Hearts)
+						},
+						new List<Card>() { },
+						new List<Card>() { }
+					},
+					false,
+					new List<Card> { },
+					new List<Card> { },
+					new List<Card>()
+					{
+
+					},
+					new List<Card> { },
+					new List<Card>
+					{
+						new Card(Rank.King, Suit.Diamonds),
+						new Card(Rank.Nine, Suit.Spades),
+						new Card(Rank.Two, Suit.Diamonds),
+						new Card(Rank.Six, Suit.Diamonds),
+						new Card(Rank.Six, Suit.Hearts)
+					},
+					new List<Card> { },
+					new List<Card> { }
+				).SetName("Original Pile is empty");
+
+				yield return new TestCaseData(
+					new List<List<Card>>()
+					{
+						new List<Card>() { },
+						new List<Card>() { },
+						new List<Card>()
+						{
+							new Card(Rank.Ace, Suit.Spades),
+							new Card(Rank.Five, Suit.Clubs),
+							new Card(Rank.Five, Suit.Diamonds),
+						},
+						new List<Card>() { },
+						new List<Card>()
+						{
+
+						},
+						new List<Card>() { },
+						new List<Card>() { }
+					},
+					false,
+					new List<Card> { },
+					new List<Card> { },
+					new List<Card>()
+					{
+						new Card(Rank.Ace, Suit.Spades),
+						new Card(Rank.Five, Suit.Clubs),
+						new Card(Rank.Five, Suit.Diamonds),
+					},
+					new List<Card> { },
+					new List<Card>
+					{
+
+					},
+					new List<Card> { },
+					new List<Card> { }
+				).SetName("Target Pile is empty");
+
 			}
 		}
 
@@ -200,12 +279,6 @@ namespace Solitaire.Domain.Test
 			Assert.AreEqual(tableau.CardCanBeMoved, pCardCanBeMoved);
 			CollectionAssert.AreEqual(expectedPile3, tableau.TableauPile3);
 			CollectionAssert.AreEqual(expectedPile5, tableau.TableauPile5);
-
-
-			// Can this Card be moved ?
-			// If the Card can be moved, check if Card is correctly removed from pile and added to another pile
-			// If Card cannot be moved, ensure that Card is not removed from pile it was taken from
-
 		}
 	}
 }
