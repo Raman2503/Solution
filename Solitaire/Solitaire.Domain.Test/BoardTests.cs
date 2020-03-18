@@ -285,9 +285,7 @@ namespace Solitaire.Domain.Test
 					},
 					new List<Card> { },
 					new List<Card> { }
-				).SetName("King on Empty Target Pile");
-
-
+				).SetName("Move King To Empty Target Pile");
 			}
 		}
 

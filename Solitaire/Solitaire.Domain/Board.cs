@@ -5,9 +5,9 @@ namespace Solitaire.Domain
 {
 	public class Board
 	{
-		public Tableau Tableau { get; }
-		public Foundation Foundation { get; }
-		public Stock Stock { get; }
+		 Tableau Tableau { get; }
+		 Foundation Foundation { get; }
+		 Stock Stock { get; }
 
 		public Board(Tableau tableau, Foundation foundation, Stock stock)
 		{
@@ -21,8 +21,7 @@ namespace Solitaire.Domain
 			Tableau.Initialize(initialTableauPiles);
 		}
 
-
-		//
+			
 	}
 }
 
