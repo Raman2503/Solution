@@ -251,12 +251,49 @@ namespace Solitaire.Domain.Test
 					new List<Card> { }
 				).SetName("Target Pile is empty");
 
+				yield return new TestCaseData(
+					new List<List<Card>>()
+					{
+						new List<Card>() { },
+						new List<Card>() { },
+						new List<Card>()
+						{
+							new Card(Rank.Ace, Suit.Spades),
+							new Card(Rank.Five, Suit.Clubs),
+							new Card(Rank.King, Suit.Diamonds),
+						},
+						new List<Card>() { },
+						new List<Card>()
+						{
+
+						},
+						new List<Card>() { },
+						new List<Card>() { }
+					},
+					true,
+					new List<Card> { },
+					new List<Card> { },
+					new List<Card>()
+					{
+						new Card(Rank.Ace, Suit.Spades),
+						new Card(Rank.Five, Suit.Clubs),
+					},
+					new List<Card> { },
+					new List<Card>
+					{
+						new Card(Rank.King, Suit.Diamonds)
+					},
+					new List<Card> { },
+					new List<Card> { }
+				).SetName("King on Empty Target Pile");
+
+
 			}
 		}
 
 		[Test]
 		[TestCaseSource(nameof(MoveCardsTestCases))]
-		public void MoveCardsTest(List<List<Card>> initialTableauPiles, 
+		public void MoveCardsFromTableauToTableauTest(List<List<Card>> initialTableauPiles, 
 			bool pCardCanBeMoved,
 			List<Card> expectedPile1,
 			List<Card> expectedPile2,
@@ -268,8 +305,10 @@ namespace Solitaire.Domain.Test
 		{
 			//Arrange
 			Tableau tableau = new Tableau();
+			Foundation foundation = new Foundation();
+			Stock stock = new Stock();
 
-			Board board = new Board(tableau);
+			Board board = new Board(tableau, foundation, stock);
 
 			//Act
 			board.InitializeBoard(initialTableauPiles);

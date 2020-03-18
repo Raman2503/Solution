@@ -78,14 +78,13 @@ namespace Solitaire.Domain
 			
 		}
 
-
 		public void CheckRankAndSuitInTableau(List<List<Card>> initialTableauPiles)
 		{
 			if (initialTableauPiles.Any())
 			{
 				var pile3 = initialTableauPiles[2];
 				var pile5 = initialTableauPiles[4];
-
+				
 				if(pile5.Any() && pile3.Any())
 				{
 					var cardToBeMoved = pile3.Last();
@@ -99,14 +98,16 @@ namespace Solitaire.Domain
 
 							MoveCardFromTableauToTableau(pile3, pile5, cardToBeMoved);
 						}
-
 					}
-					else
-						return;
+				}
+				else if(pile5.Count == 0 && pile3.Last().Rank == Rank.King)
+				{
+					var cardToBeMoved = pile3.Last();
+
+					MoveCardFromTableauToTableau(pile3, pile5, cardToBeMoved);
 				}
 			}
 		}
-
 	}
 }
  		
