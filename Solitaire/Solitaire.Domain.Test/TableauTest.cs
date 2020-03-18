@@ -236,5 +236,19 @@ namespace Solitaire.Domain.Test
 			CollectionAssert.AreEqual(expectedPile7, tableau.TableauPile7);
 
 		}
+
+		[Test]
+		public void ASd()
+		{
+			//Arrange
+			Tableau tableau = new Tableau();
+
+
+			tableau.Initialize(new List<List<Card>>());
+
+			tableau.TableauPile1.Clear();
+
+
+		}
 	}
 }

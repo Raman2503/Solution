@@ -1,6 +1,5 @@
 ﻿using NUnit.Framework;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Solitaire.Domain.Test
 {
@@ -77,11 +76,13 @@ namespace Solitaire.Domain.Test
 		}
 
 
+		// ReSharper disable once InvalidXmlDocComment
 		/// <summary>
 		/// This test checks, that the first card to be placed on each pile has the rank Ace.
 		/// Also the test, ensures that the foundation is not empty anymore.
-		/// <summary>
-			[Test]
+		// ReSharper disable once InvalidXmlDocComment
+		/// <summary />
+		[Test]
 		[TestCaseSource(nameof(FoundationInitializeTestCases))]
 		public void FoundationInitializeTest(
 			List<Card> initialFoundationCards, 

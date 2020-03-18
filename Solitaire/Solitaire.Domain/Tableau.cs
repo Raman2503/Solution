@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Solitaire.Domain
 {
@@ -17,13 +15,12 @@ namespace Solitaire.Domain
 		public List<Card> TableauPile7 { get; set; } = new List<Card>();
 
 
-
 		/// <summary>
 		/// This method initializes the respective pile on the tableau, if the associated number of cards
 		/// is correct. E.g. The third pile on the tableau must have 3 cards. The first one only one card.
 		/// </summary>
 		/// <param name="tableauPiles"></param>
-		public void Initialize(List <List<Card>> tableauPiles)
+		public void Initialize(List<List<Card>> tableauPiles)
 		{
 			_ = tableauPiles ?? throw new ArgumentNullException(nameof(tableauPiles));
 
@@ -65,6 +62,43 @@ namespace Solitaire.Domain
 				}
 			}
 		}
+
+
+		public void MoveCardFromTableauToTableau(List<Card> pPile3, List<Card> pPile5, Card pCardToBeMoved)
+		{
+			if (pPile3.Any() || pPile5.Any())
+			{
+				pPile5.Add(pCardToBeMoved);
+				pPile3.Remove(pCardToBeMoved);
+
+				TableauPile3 = pPile3;
+				TableauPile5 = pPile5;
+				//CardCanBeMoved = true;
+			}
+		}
+
+
+		public void CheckRankAndSuitInTableau(List<List<Card>> initialTableauPiles)
+		{
+			if (initialTableauPiles.Any())
+			{
+				var pile3 = initialTableauPiles[2];
+				var pile5 = initialTableauPiles[4];
+
+				var cardToBeMoved = pile3.Last();
+				var openCardFromTargetPile = pile5.Last();
+
+				if (cardToBeMoved.IsBlack && openCardFromTargetPile.IsRed ||
+					cardToBeMoved.IsRed && openCardFromTargetPile.IsBlack)
+				{
+					if (openCardFromTargetPile.Rank - cardToBeMoved.Rank == 1)
+					{
+						MoveCardFromTableauToTableau(pile3, pile5, cardToBeMoved);
+					}
+				}
+			}
+		}
+
 	}
 }
  		

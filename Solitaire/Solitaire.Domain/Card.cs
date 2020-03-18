@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Solitaire.Domain
 {
@@ -11,10 +7,24 @@ namespace Solitaire.Domain
 		public Rank Rank { get; set; }
 		public Suit Suit { get; set; }
 
+		public bool IsBlack { get; set; }
+
+		public bool IsRed { get; set; }
+
 		public Card(Rank pRank, Suit pSuit)
 		{
 			Rank = pRank;
 			Suit = pSuit;
+
+			if (pSuit == Suit.Hearts || pSuit == Suit.Diamonds)
+			{
+				IsRed = true;
+			}
+
+			if (pSuit == Suit.Clubs || pSuit == Suit.Spades)
+			{
+				IsBlack = true;
+			}
 		}
 
 		public override string ToString()

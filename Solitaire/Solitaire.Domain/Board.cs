@@ -1,25 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.AccessControl;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+
 
 namespace Solitaire.Domain
 {
 	public class Board
 	{
-		public Tableau Tableau { get; set; }
-		public bool CardCanBeMoved { get; set; }
+		public Tableau Tableau { get; }
 
-		public void InitializeBoard(List<Card> pPile3, List<Card> pPile5)
+		public Board(Tableau tableau)
 		{
-			
+			Tableau = tableau;
 		}
 
-		public bool MoveCardFromTableauToTableau(List<Card> pPile3, List<Card> pPile5)
+		public void InitializeBoard(List<List<Card>> initialTableauPiles)
 		{
-			return CardCanBeMoved;
+			Tableau.Initialize(initialTableauPiles);
 		}
+
+
+		//
 	}
 }
+

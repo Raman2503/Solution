@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using System.Collections.Generic;
 
 namespace Solitaire.Domain.Test
@@ -11,33 +12,153 @@ namespace Solitaire.Domain.Test
 			get
 			{
 				yield return new TestCaseData(
-					new List<Card>(),
-					new List<Card>(),
-					true
-				);
+					new List<List<Card>>() {},
+					false,
+					new List<Card> { },
+					new List<Card> { },
+					new List<Card> { },
+					new List<Card> { },
+					new List<Card> { },
+					new List<Card> { },
+					new List<Card> { }
+					).SetName("Empty case");
 
-				// Empty Case: Moving Card from empty pile to empty pile
+				yield return new TestCaseData(
+					null,
+					false,
+					new List<Card> { },
+					new List<Card> { },
+					new List<Card> { },
+					new List<Card> { },
+					new List<Card> { },
+					new List<Card> { },
+					new List<Card> { }
+				).SetName("Null Case").Throws(typeof(ArgumentNullException));
+
 				// Move Card from normal pile to another pile
+				yield return new TestCaseData(
+					new List<List<Card>>()
+					{
+						new List<Card>() { },
+						new List<Card>() { },
+						new List<Card>()
+						{
+							new Card(Rank.Ace, Suit.Spades),
+							new Card(Rank.Five, Suit.Clubs),
+							new Card(Rank.Five, Suit.Spades),
+						},
+						new List<Card>() { },
+						new List<Card>()
+						{
+							new Card(Rank.King, Suit.Diamonds),
+							new Card(Rank.Nine, Suit.Spades),
+							new Card(Rank.Two, Suit.Diamonds),
+							new Card(Rank.Six, Suit.Diamonds),
+							new Card(Rank.Six, Suit.Hearts)
+						},
+						new List<Card>() { },
+						new List<Card>() { }
+					},
+						false,
+						new List<Card> { },
+						new List<Card> { },
+						new List<Card>()
+						{
+							new Card(Rank.Ace, Suit.Spades),
+							new Card(Rank.Five, Suit.Clubs),
+						},
+						new List<Card> { },
+						new List<Card>
+						{                          
+							new Card(Rank.King, Suit.Diamonds), 
+							new Card(Rank.Nine, Suit.Spades),
+							new Card(Rank.Two, Suit.Diamonds),
+							new Card(Rank.Six, Suit.Diamonds),
+							new Card(Rank.Six, Suit.Hearts),
+							new Card(Rank.Five, Suit.Spades),
+						},
+						new List<Card> { },
+						new List<Card> { }
+				).SetName("Card Can Be Moved");
+
+				// Move Card from normal pile to another pile
+				yield return new TestCaseData(
+					new List<List<Card>>()
+					{
+						new List<Card>() { },
+						new List<Card>() { },
+						new List<Card>()
+						{
+							new Card(Rank.Ace, Suit.Spades),
+							new Card(Rank.Five, Suit.Clubs),
+							new Card(Rank.Five, Suit.Spades),
+						},
+						new List<Card>() { },
+						new List<Card>()
+						{
+							new Card(Rank.King, Suit.Diamonds),
+							new Card(Rank.Nine, Suit.Spades),
+							new Card(Rank.Two, Suit.Diamonds),
+							new Card(Rank.Six, Suit.Diamonds),
+							new Card(Rank.Six, Suit.Hearts)
+						},
+						new List<Card>() { },
+						new List<Card>() { }
+					},
+					false,
+					new List<Card> { },
+					new List<Card> { },
+					new List<Card>()
+					{
+						new Card(Rank.Ace, Suit.Spades),
+						new Card(Rank.Five, Suit.Clubs),
+						new Card(Rank.Eight, Suit.Spades),
+					},
+					new List<Card> { },
+					new List<Card>
+					{
+						new Card(Rank.King, Suit.Diamonds),
+						new Card(Rank.Nine, Suit.Spades),
+						new Card(Rank.Two, Suit.Diamonds),
+						new Card(Rank.Six, Suit.Diamonds),
+						new Card(Rank.Six, Suit.Hearts),
+					},
+					new List<Card> { },
+					new List<Card> { }
+				).SetName("Card Cannot Be Moved");
 			}
 		}
 
 		[Test]
 		[TestCaseSource(nameof(MoveCardsTestCases))]
-		public void MoveCardsTest(List<Card> pPile3, List<Card> pPile5, bool CardCanBeMoved)
+		public void MoveCardsTest(List<List<Card>> initialTableauPiles, 
+			bool pCardCanBeMoved,
+			List<Card> expectedPile1,
+			List<Card> expectedPile2,
+			List<Card> expectedPile3,
+			List<Card> expectedPile4,
+			List<Card> expectedPile5,
+			List<Card> expectedPile6,
+			List<Card> expectedPile7)
 		{
 			//Arrange
-			Board board = new Board();
+			Tableau tableau = new Tableau();
+
+			Board board = new Board(tableau);
 
 			//Act
-			board.InitializeBoard(pPile3, pPile5);
-
-			board.MoveCardFromTableauToTableau(pPile3, pPile5);
-
+			board.InitializeBoard(initialTableauPiles);
+			tableau.CheckRankAndSuitInTableau(initialTableauPiles);
+			
 			//Assert
+			CollectionAssert.AreEqual(expectedPile3, tableau.TableauPile3);
+			CollectionAssert.AreEqual(expectedPile5, tableau.TableauPile5);
+
+
 			// Can this Card be moved ?
 			// If the Card can be moved, check if Card is correctly removed from pile and added to another pile
 			// If Card cannot be moved, ensure that Card is not removed from pile it was taken from
-			
+
 		}
 	}
 }
