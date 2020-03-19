@@ -18,8 +18,7 @@ namespace Solitaire.Domain
 
 
 		/// <summary>
-		/// This method initializes the respective pile on the tableau, if the associated number of cards
-		/// is correct. E.g. The third pile on the tableau must have 3 cards. The first one only one card.
+		/// This method initializes the respective pile on the tableau.
 		/// </summary>
 		/// <param name="tableauPiles"></param>
 		public void Initialize(List<List<Card>> tableauPiles)
@@ -28,40 +27,20 @@ namespace Solitaire.Domain
 
 			if (tableauPiles.Any())
 			{
-				if (tableauPiles[0].Count == 1)
-				{
-					TableauPile1.AddRange(tableauPiles[0]);
-				}
+				TableauPile1.AddRange(tableauPiles[0]);
 
-				if (tableauPiles[1].Count == 2)
-				{
-					TableauPile2.AddRange(tableauPiles[1]);
-				}
+				TableauPile2.AddRange(tableauPiles[1]);
 
-				if (tableauPiles[2].Count == 3)
-				{
-					TableauPile3.AddRange(tableauPiles[2]);
-				}
+				TableauPile3.AddRange(tableauPiles[2]);
 
-				if (tableauPiles[3].Count == 4)
-				{
-					TableauPile4.AddRange(tableauPiles[3]);
-				}
+				TableauPile4.AddRange(tableauPiles[3]);
 
-				if (tableauPiles[4].Count == 5)
-				{
-					TableauPile5.AddRange(tableauPiles[4]);
-				}
+				TableauPile5.AddRange(tableauPiles[4]);
 
-				if (tableauPiles[5].Count == 6)
-				{
-					TableauPile6.AddRange(tableauPiles[5]);
-				}
+				TableauPile6.AddRange(tableauPiles[5]);
 
-				if (tableauPiles[6].Count == 7)
-				{
-					TableauPile7.AddRange(tableauPiles[6]);
-				}
+				TableauPile7.AddRange(tableauPiles[6]);
+
 			}
 		}
 
