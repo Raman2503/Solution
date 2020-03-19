@@ -20,7 +20,8 @@ namespace Solitaire.Domain.Test
 					new List<Card> { },
 					new List<Card> { },
 					new List<Card> { },
-					new List<Card> { }
+					new List<Card> { },
+					null
 					).SetName("Empty case");
 
 				yield return new TestCaseData(
@@ -32,7 +33,8 @@ namespace Solitaire.Domain.Test
 					new List<Card> { },
 					new List<Card> { },
 					new List<Card> { },
-					new List<Card> { }
+					new List<Card> { },
+					null
 				).SetName("Null Case").Throws(typeof(ArgumentNullException));
 
 				// Move Card from normal pile to another pile
@@ -78,7 +80,8 @@ namespace Solitaire.Domain.Test
 							new Card(Rank.Five, Suit.Spades),
 						},
 						new List<Card> { },
-						new List<Card> { }
+						new List<Card> { },
+						new Card(Rank.Five, Suit.Clubs)
 				).SetName("Card Can Be Moved");
 
 				// Card cannot be moved because rank is wrong
@@ -124,8 +127,9 @@ namespace Solitaire.Domain.Test
 						new Card(Rank.Six, Suit.Hearts)
 					},
 					new List<Card> { },
-					new List<Card> { }
-				).SetName("Card Cannot Be Moved: Wrong Rank");
+					new List<Card> { },
+					new Card(Rank.Jack, Suit.Spades)					
+					).SetName("Card Cannot Be Moved: Wrong Rank");
 
 				// Card cannot be moved because rank is wrong
 				yield return new TestCaseData(
@@ -170,7 +174,8 @@ namespace Solitaire.Domain.Test
 						new Card(Rank.Six, Suit.Hearts)
 					},
 					new List<Card> { },
-					new List<Card> { }
+					new List<Card> { },
+					new Card(Rank.Five, Suit.Diamonds)
 				).SetName("Card Cannot Be Moved: Wrong Suit");
 
 				yield return new TestCaseData(
@@ -211,7 +216,8 @@ namespace Solitaire.Domain.Test
 						new Card(Rank.Six, Suit.Hearts)
 					},
 					new List<Card> { },
-					new List<Card> { }
+					new List<Card> { },
+					null
 				).SetName("Original Pile is empty");
 
 				yield return new TestCaseData(
@@ -248,7 +254,8 @@ namespace Solitaire.Domain.Test
 
 					},
 					new List<Card> { },
-					new List<Card> { }
+					new List<Card> { },
+					new Card(Rank.Five, Suit.Diamonds)
 				).SetName("Target Pile is empty");
 
 				yield return new TestCaseData(
@@ -284,7 +291,8 @@ namespace Solitaire.Domain.Test
 						new Card(Rank.King, Suit.Diamonds)
 					},
 					new List<Card> { },
-					new List<Card> { }
+					new List<Card> { },
+					new Card(Rank.Five, Suit.Clubs)
 				).SetName("Move King To Empty Target Pile");
 			}
 		}
@@ -299,7 +307,8 @@ namespace Solitaire.Domain.Test
 			List<Card> expectedPile4,
 			List<Card> expectedPile5,
 			List<Card> expectedPile6,
-			List<Card> expectedPile7)
+			List<Card> expectedPile7,
+			Card openCard)
 		{
 			//Arrange
 			Tableau tableau = new Tableau();
@@ -316,6 +325,7 @@ namespace Solitaire.Domain.Test
 			Assert.AreEqual(tableau.CardCanBeMoved, pCardCanBeMoved);
 			CollectionAssert.AreEqual(expectedPile3, tableau.TableauPile3);
 			CollectionAssert.AreEqual(expectedPile5, tableau.TableauPile5);
+			Assert.AreEqual(tableau.OpenCard, openCard);
 		}
 	}
 }

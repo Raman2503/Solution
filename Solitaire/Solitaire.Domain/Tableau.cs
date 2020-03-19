@@ -16,6 +16,8 @@ namespace Solitaire.Domain
 
 		public bool CardCanBeMoved { get; set; }
 
+		public Card OpenCard { get; set; }
+
 
 		/// <summary>
 		/// This method initializes the respective pile on the tableau.
@@ -53,8 +55,10 @@ namespace Solitaire.Domain
 
 				TableauPile3 = pPile3;
 				TableauPile5 = pPile5;
+
 				CardCanBeMoved = true;
-			
+
+				OpenCard = TableauPile3.Last();		
 		}
 
 		public void CheckRankAndSuitInTableau(List<List<Card>> initialTableauPiles)
@@ -63,27 +67,40 @@ namespace Solitaire.Domain
 			{
 				var pile3 = initialTableauPiles[2];
 				var pile5 = initialTableauPiles[4];
-				
-				if(pile5.Any() && pile3.Any())
+
+				if (pile5.Any() && pile3.Any())
 				{
 					var cardToBeMoved = pile3.Last();
 					var openCardFromTargetPile = pile5.Last();
 
 					if (openCardFromTargetPile.Rank - cardToBeMoved.Rank == 1)
 					{
+
 						if (cardToBeMoved.IsBlack && openCardFromTargetPile.IsRed ||
-						    cardToBeMoved.IsRed && openCardFromTargetPile.IsBlack)
+							cardToBeMoved.IsRed && openCardFromTargetPile.IsBlack)
 						{
 
 							MoveCardFromTableauToTableau(pile3, pile5, cardToBeMoved);
 						}
+
+						else
+						OpenCard = pile3.Last();
 					}
+
+					else
+						OpenCard = pile3.Last();
 				}
-				else if(pile5.Count == 0 && pile3.Last().Rank == Rank.King)
+
+				else if (pile5.Count == 0 && pile3.Last().Rank == Rank.King)
 				{
 					var cardToBeMoved = pile3.Last();
 
 					MoveCardFromTableauToTableau(pile3, pile5, cardToBeMoved);
+				}
+				
+				else if(pile5.Count == 0)
+				{
+					OpenCard = pile3.Last();
 				}
 			}
 		}
