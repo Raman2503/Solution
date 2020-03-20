@@ -11,8 +11,10 @@ namespace Solitaire.Domain.Test
         [Test]
         public void StockInitializeTest()
         {
-            //Arrange
-            Stock stock = new Stock();
+			//Arrange
+			Tableau tableau = new Tableau();
+
+            Stock stock = new Stock(tableau);
 
             List<Card> initialCards = new List<Card>()
             {
@@ -43,8 +45,9 @@ namespace Solitaire.Domain.Test
         [Test]
         public void DrawNewCardTest()
         {
-            //Arrange
-            Stock stock = new Stock();
+			//Arrange
+			Tableau tableau = new Tableau();
+            Stock stock = new Stock(tableau);
 
             List<Card> initialCards = new List<Card>()
             {
@@ -77,9 +80,14 @@ namespace Solitaire.Domain.Test
 		public void CheckNumberOfCompleteCardsInStock()
 		{
 			//Arrange
-			Stock stock = new Stock();
+			Tableau tableau = new Tableau();
+			Stock stock = new Stock(tableau);
 
-			CardDeck deck = CardDeckFactory.GenerateDeck();
+			CardDeck deck = new CardDeck();
+
+			CardDeckFactory df = new CardDeckFactory(deck);
+
+			df.GenerateDeck();
 
 			var completeStock = deck.Cards.Take(24).ToList();
 

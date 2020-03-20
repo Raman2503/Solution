@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Solitaire.Domain
 {
@@ -64,6 +65,11 @@ namespace Solitaire.Domain
 		public static bool operator !=(Card left, Card right)
 		{
 			return !Equals(left, right);
+		}
+
+		public static implicit operator List<object>(Card v)
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

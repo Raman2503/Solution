@@ -16,12 +16,15 @@ namespace Solitaire.Domain
 			Stock = stock;
 		}
 
-		public void InitializeBoard(List<List<Card>> initialTableauPiles)
+		public void InitializeTableau(List<List<Card>> initialTableauPiles)
 		{
 			Tableau.Initialize(initialTableauPiles);
 		}
 
-			
+		public void InitializeStock(List<Card> initialStockCards)
+		{
+			Stock.Initialize(initialStockCards);
+		}
 	}
 }
 

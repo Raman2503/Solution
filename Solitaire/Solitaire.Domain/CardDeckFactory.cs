@@ -7,21 +7,26 @@ using System.Threading.Tasks;
 namespace Solitaire.Domain
 {
 	// A deck consists of 52 cards.
-	public static class CardDeckFactory
+	public class CardDeckFactory
 	{
+		CardDeck CardDeck { get;}
 
-	    public static CardDeck GenerateDeck()
+		public CardDeckFactory(CardDeck deck)
 		{
-            CardDeck deck = new CardDeck();
+			CardDeck = deck;
+		}
 
+	    public CardDeck GenerateDeck()
+		{
 			var cards = Enumerable
                 .Range(1, 4)
                 .SelectMany(suit => Enumerable.Range(1, 13)
                     .Select(rank => new Card((Rank)rank, (Suit)suit)).ToList());
 
-            deck.Cards.AddRange(cards);
 
-			return deck;
+			CardDeck.Cards.AddRange(cards);
+
+			return CardDeck;
 		}
 	}
 }

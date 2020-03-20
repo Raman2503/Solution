@@ -14,7 +14,11 @@ namespace Solitaire.Domain.Test
 		// This tests checks, if card deck is created properly. All 52 cards are written on the console.
 		public void NumberOfCardsInDeckTest()
 		{
-			CardDeck deck = CardDeckFactory.GenerateDeck();
+			CardDeck deck = new CardDeck();
+
+			CardDeckFactory df = new CardDeckFactory(deck);
+
+			df.GenerateDeck();
 
             Console.WriteLine(deck.Count);
             Assert.AreEqual(deck.Count, 52);

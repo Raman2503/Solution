@@ -6,13 +6,13 @@ namespace Solitaire.Domain
 {
 	public class Tableau
 	{
-		public List<Card> TableauPile1 { get; private set; } = new List<Card>();
-		public List<Card> TableauPile2 { get; private set; } = new List<Card>();
-		public List<Card> TableauPile3 { get; private set; } = new List<Card>();
-		public List<Card> TableauPile4 { get; private set; } = new List<Card>();
-		public List<Card> TableauPile5 { get; private set; } = new List<Card>();
-		public List<Card> TableauPile6 { get; private set; } = new List<Card>();
-		public List<Card> TableauPile7 { get; private set; } = new List<Card>();
+		public List<Card> TableauPile1 { get; set; } = new List<Card>();
+		public List<Card> TableauPile2 { get; set; } = new List<Card>();
+		public List<Card> TableauPile3 { get; set; } = new List<Card>();
+		public List<Card> TableauPile4 { get; set; } = new List<Card>();
+		public List<Card> TableauPile5 { get; set; } = new List<Card>();
+		public List<Card> TableauPile6 { get; set; } = new List<Card>();
+		public List<Card> TableauPile7 { get; set; } = new List<Card>();
 
 		public bool CardCanBeMoved { get; set; }
 
