@@ -27,7 +27,8 @@ namespace Solitaire.Domain
 		{
 			_ = initialCards ?? throw new System.ArgumentNullException(nameof(initialCards));
 
-			StockCards.AddRange(initialCards);
+				StockCards.AddRange(initialCards);
+	
 		}
 
 		public List<Card> GetOpenCards()
@@ -49,8 +50,11 @@ namespace Solitaire.Domain
 
 		public void DrawFromStock()
 		{
-			OpenCards.Insert(0, (StockCards[1]));
-			ClosedCards.Remove(StockCards[1]);
+			if (OpenCards.Any())
+			{
+				OpenCards.Insert(0, (StockCards[1]));
+				ClosedCards.Remove(StockCards[1]);
+			}
 		}
 
 		public List<Card> CreateCompleteStock(List<Card> completeStock)

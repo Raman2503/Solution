@@ -391,7 +391,7 @@ namespace Solitaire.Domain.Test
 				new Card(Rank.Ace, Suit.Clubs),
 				new Card(Rank.Four, Suit.Diamonds),
 				new Card(Rank.Eight, Suit.Hearts),
-				new Card(Rank.Six, Suit.Spades),				
+				new Card(Rank.Six, Suit.Spades),
 				},
 				new Card(Rank.Queen, Suit.Hearts),
 				new List<Card>()
@@ -406,7 +406,7 @@ namespace Solitaire.Domain.Test
 				new Card(Rank.Ace, Suit.Clubs),
 				new Card(Rank.Four, Suit.Diamonds),
 				new Card(Rank.Eight, Suit.Hearts),
-				new Card(Rank.Six, Suit.Spades),				
+				new Card(Rank.Six, Suit.Spades),
 				},
 				new List<Card>()
 				{
@@ -414,9 +414,9 @@ namespace Solitaire.Domain.Test
 				new Card(Rank.Ace, Suit.Spades),
 				new Card(Rank.Five, Suit.Clubs),
 				},
-				new List<Card> {new Card(Rank.Queen, Suit.Hearts)}
+				new List<Card> { new Card(Rank.Queen, Suit.Hearts) }
 			).SetName("Card Could Not Be Moved From Stock To Tableau");
-		}
+			}
 
 		}
 		[Test]
@@ -444,6 +444,70 @@ namespace Solitaire.Domain.Test
 			CollectionAssert.AreEqual(expectedTableauPile, tableau.TableauPile3);
 			CollectionAssert.AreEqual(expectedStockCards, stock.StockCards);
 			Assert.AreEqual(expectedOpenCards, stock.OpenCards);
+		}
+
+		public IEnumerable<TestCaseData> DrawCardsFromStockTestCases
+		{
+			get
+			{
+				yield return new TestCaseData(
+					new List<Card> { },
+					new List<Card> { },
+					new List<Card> { }
+			).SetName("Empty Stock");
+			
+
+				yield return new TestCaseData(
+					null,
+					new List<Card> { },
+					new List<Card> { }
+			).SetName("Stock Null Case").Throws(typeof(ArgumentNullException));
+
+				yield return new TestCaseData(
+					new List<Card> {
+					new Card(Rank.Ace, Suit.Spades),
+					new Card(Rank.Jack, Suit.Hearts),
+					new Card(Rank.Seven, Suit.Clubs),				
+					},
+					new List<Card> {
+				    new Card(Rank.Ace, Suit.Spades),
+					new Card(Rank.Jack, Suit.Hearts),
+					new Card(Rank.Seven, Suit.Clubs),},
+					new List<Card> {
+					new Card(Rank.Jack, Suit.Hearts),
+					new Card(Rank.Ace, Suit.Spades),
+					}
+			).SetName("Draw Card From Stock");
+
+
+			}
+		}
+		[Test]
+		[TestCaseSource(nameof(DrawCardsFromStockTestCases))]
+		public void DrawCardsFromStockTest(
+			List <Card> initialStockCards,
+			List <Card> expectedStockCards,
+			List <Card> expectedOpenCards
+			)
+		{
+			//Arrange
+			Tableau tableau = new Tableau();
+			Stock stock = new Stock(tableau);
+			Foundation foundation = new Foundation();
+
+			Board board = new Board(tableau, foundation, stock);
+
+			//Act
+			board.InitializeStock(initialStockCards);
+			stock.GetOpenCards();
+			stock.DrawFromStock();
+
+			//Assert
+			CollectionAssert.AreEqual(expectedStockCards, stock.StockCards);
+			CollectionAssert.AreEqual(expectedOpenCards, stock.OpenCards);
+
+			if(stock.StockCards.Count != 0)
+			Assert.AreEqual(expectedOpenCards[0], stock.StockCards[1]);
 		}
 	}
 }
