@@ -45,19 +45,19 @@ namespace Solitaire.Domain.Test
 						new List<Card>() { },
 						new List<Card>()
 						{
+							new Card(Rank.Five, Suit.Spades),
 							new Card(Rank.Ace, Suit.Spades),
 							new Card(Rank.Five, Suit.Clubs),
-							new Card(Rank.Five, Suit.Spades),
 						},
 						new List<Card>() { },
 						new List<Card>()
 						{
+							new Card(Rank.Six, Suit.Hearts),
 							new Card(Rank.King, Suit.Diamonds),
 							new Card(Rank.Nine, Suit.Spades),
 							new Card(Rank.Two, Suit.Diamonds),
 							new Card(Rank.Six, Suit.Diamonds),
-							new Card(Rank.Six, Suit.Hearts)
-						},
+										},
 						new List<Card>() { },
 						new List<Card>() { }
 					},
@@ -72,16 +72,16 @@ namespace Solitaire.Domain.Test
 						new List<Card> { },
 						new List<Card>
 						{
+							new Card(Rank.Five, Suit.Spades),
+							new Card(Rank.Six, Suit.Hearts),
 							new Card(Rank.King, Suit.Diamonds),
 							new Card(Rank.Nine, Suit.Spades),
 							new Card(Rank.Two, Suit.Diamonds),
 							new Card(Rank.Six, Suit.Diamonds),
-							new Card(Rank.Six, Suit.Hearts),
-							new Card(Rank.Five, Suit.Spades),
 						},
 						new List<Card> { },
 						new List<Card> { },
-						new Card(Rank.Five, Suit.Clubs)
+						new Card(Rank.Ace, Suit.Spades)
 				).SetName("Card Can Be Moved");
 
 				// Card cannot be moved because rank is wrong
@@ -92,18 +92,18 @@ namespace Solitaire.Domain.Test
 						new List<Card>() { },
 						new List<Card>()
 						{
+							new Card(Rank.Jack, Suit.Spades),
 							new Card(Rank.Ace, Suit.Spades),
 							new Card(Rank.Five, Suit.Clubs),
-							new Card(Rank.Jack, Suit.Spades),
 						},
 						new List<Card>() { },
 						new List<Card>()
 						{
+							new Card(Rank.Six, Suit.Hearts),
 							new Card(Rank.King, Suit.Diamonds),
 							new Card(Rank.Nine, Suit.Spades),
 							new Card(Rank.Two, Suit.Diamonds),
 							new Card(Rank.Six, Suit.Diamonds),
-							new Card(Rank.Six, Suit.Hearts)
 						},
 						new List<Card>() { },
 						new List<Card>() { }
@@ -113,18 +113,18 @@ namespace Solitaire.Domain.Test
 					new List<Card> { },
 					new List<Card>()
 					{
+						new Card(Rank.Jack, Suit.Spades),
 						new Card(Rank.Ace, Suit.Spades),
 						new Card(Rank.Five, Suit.Clubs),
-						new Card(Rank.Jack, Suit.Spades),
 					},
 					new List<Card> { },
 					new List<Card>
 					{
+						new Card(Rank.Six, Suit.Hearts),
 						new Card(Rank.King, Suit.Diamonds),
 						new Card(Rank.Nine, Suit.Spades),
 						new Card(Rank.Two, Suit.Diamonds),
 						new Card(Rank.Six, Suit.Diamonds),
-						new Card(Rank.Six, Suit.Hearts)
 					},
 					new List<Card> { },
 					new List<Card> { },
@@ -139,18 +139,18 @@ namespace Solitaire.Domain.Test
 						new List<Card>() { },
 						new List<Card>()
 						{
+							new Card(Rank.Five, Suit.Diamonds),
 							new Card(Rank.Ace, Suit.Spades),
 							new Card(Rank.Five, Suit.Clubs),
-							new Card(Rank.Five, Suit.Diamonds),
 						},
 						new List<Card>() { },
 						new List<Card>()
 						{
+							new Card(Rank.Six, Suit.Hearts),
 							new Card(Rank.King, Suit.Diamonds),
 							new Card(Rank.Nine, Suit.Spades),
 							new Card(Rank.Two, Suit.Diamonds),
 							new Card(Rank.Six, Suit.Diamonds),
-							new Card(Rank.Six, Suit.Hearts)
 						},
 						new List<Card>() { },
 						new List<Card>() { }
@@ -160,18 +160,18 @@ namespace Solitaire.Domain.Test
 					new List<Card> { },
 					new List<Card>()
 					{
+						new Card(Rank.Five, Suit.Diamonds),
 						new Card(Rank.Ace, Suit.Spades),
 						new Card(Rank.Five, Suit.Clubs),
-						new Card(Rank.Five, Suit.Diamonds),
 					},
 					new List<Card> { },
 					new List<Card>
 					{
+						new Card(Rank.Six, Suit.Hearts),
 						new Card(Rank.King, Suit.Diamonds),
 						new Card(Rank.Nine, Suit.Spades),
 						new Card(Rank.Two, Suit.Diamonds),
 						new Card(Rank.Six, Suit.Diamonds),
-						new Card(Rank.Six, Suit.Hearts)
 					},
 					new List<Card> { },
 					new List<Card> { },
@@ -190,11 +190,11 @@ namespace Solitaire.Domain.Test
 						new List<Card>() { },
 						new List<Card>()
 						{
+							new Card(Rank.Six, Suit.Hearts),
 							new Card(Rank.King, Suit.Diamonds),
 							new Card(Rank.Nine, Suit.Spades),
 							new Card(Rank.Two, Suit.Diamonds),
 							new Card(Rank.Six, Suit.Diamonds),
-							new Card(Rank.Six, Suit.Hearts)
 						},
 						new List<Card>() { },
 						new List<Card>() { }
@@ -209,11 +209,11 @@ namespace Solitaire.Domain.Test
 					new List<Card> { },
 					new List<Card>
 					{
+						new Card(Rank.Six, Suit.Hearts),
 						new Card(Rank.King, Suit.Diamonds),
 						new Card(Rank.Nine, Suit.Spades),
 						new Card(Rank.Two, Suit.Diamonds),
 						new Card(Rank.Six, Suit.Diamonds),
-						new Card(Rank.Six, Suit.Hearts)
 					},
 					new List<Card> { },
 					new List<Card> { },
@@ -227,9 +227,9 @@ namespace Solitaire.Domain.Test
 						new List<Card>() { },
 						new List<Card>()
 						{
+							new Card(Rank.Five, Suit.Diamonds),
 							new Card(Rank.Ace, Suit.Spades),
 							new Card(Rank.Five, Suit.Clubs),
-							new Card(Rank.Five, Suit.Diamonds),
 						},
 						new List<Card>() { },
 						new List<Card>()
@@ -244,9 +244,9 @@ namespace Solitaire.Domain.Test
 					new List<Card> { },
 					new List<Card>()
 					{
+						new Card(Rank.Five, Suit.Diamonds),
 						new Card(Rank.Ace, Suit.Spades),
 						new Card(Rank.Five, Suit.Clubs),
-						new Card(Rank.Five, Suit.Diamonds),
 					},
 					new List<Card> { },
 					new List<Card>
@@ -265,9 +265,9 @@ namespace Solitaire.Domain.Test
 						new List<Card>() { },
 						new List<Card>()
 						{
+							new Card(Rank.King, Suit.Diamonds),
 							new Card(Rank.Ace, Suit.Spades),
 							new Card(Rank.Five, Suit.Clubs),
-							new Card(Rank.King, Suit.Diamonds),
 						},
 						new List<Card>() { },
 						new List<Card>()
@@ -292,7 +292,7 @@ namespace Solitaire.Domain.Test
 					},
 					new List<Card> { },
 					new List<Card> { },
-					new Card(Rank.Five, Suit.Clubs)
+					new Card(Rank.Ace, Suit.Spades)
 				).SetName("Move King To Empty Target Pile");
 			}
 		}
@@ -354,64 +354,65 @@ namespace Solitaire.Domain.Test
 				yield return new TestCaseData(
 					new List<Card>()
 				{
-				new Card(Rank.Ace, Suit.Clubs),
-				new Card(Rank.Four, Suit.Diamonds),
-				new Card(Rank.Eight, Suit.Hearts),
-				new Card(Rank.Six, Suit.Spades),
 				new Card(Rank.Queen, Suit.Clubs),
-				},
-				new Card(Rank.Queen, Suit.Clubs),
-				new List<Card>()
-				{
-				new Card(Rank.Ace, Suit.Spades),
-				new Card(Rank.Five, Suit.Clubs),
-				new Card(Rank.King, Suit.Hearts),
-				},
-				new List<Card>()
-				{
 				new Card(Rank.Ace, Suit.Clubs),
 				new Card(Rank.Four, Suit.Diamonds),
 				new Card(Rank.Eight, Suit.Hearts),
 				new Card(Rank.Six, Suit.Spades),
 				},
+				new Card(Rank.Queen, Suit.Clubs),
 				new List<Card>()
 				{
+				new Card(Rank.King, Suit.Hearts),
 				new Card(Rank.Ace, Suit.Spades),
 				new Card(Rank.Five, Suit.Clubs),
+				},
+				new List<Card>()
+				{
+				new Card(Rank.Ace, Suit.Clubs),
+				new Card(Rank.Four, Suit.Diamonds),
+				new Card(Rank.Eight, Suit.Hearts),
+				new Card(Rank.Six, Suit.Spades),
+				},
+				new List<Card>()
+				{
+				new Card(Rank.Queen, Suit.Clubs),
 				new Card(Rank.King, Suit.Hearts),
-				new Card(Rank.Queen, Suit.Clubs) },
+				new Card(Rank.Ace, Suit.Spades),
+				new Card(Rank.Five, Suit.Clubs),
+				},
 				new List<Card> { }
 			).SetName("Card Can Be Moved From Stock To Tableau");
 
 				yield return new TestCaseData(
 					new List<Card>()
 				{
+				new Card(Rank.Queen, Suit.Hearts),
 				new Card(Rank.Ace, Suit.Clubs),
 				new Card(Rank.Four, Suit.Diamonds),
 				new Card(Rank.Eight, Suit.Hearts),
-				new Card(Rank.Six, Suit.Spades),
-				new Card(Rank.Queen, Suit.Hearts),
+				new Card(Rank.Six, Suit.Spades),				
 				},
 				new Card(Rank.Queen, Suit.Hearts),
 				new List<Card>()
 				{
+				new Card(Rank.King, Suit.Hearts),
 				new Card(Rank.Ace, Suit.Spades),
 				new Card(Rank.Five, Suit.Clubs),
-				new Card(Rank.King, Suit.Hearts),
 				},
 				new List<Card>()
 				{
+				new Card(Rank.Queen, Suit.Hearts),
 				new Card(Rank.Ace, Suit.Clubs),
 				new Card(Rank.Four, Suit.Diamonds),
 				new Card(Rank.Eight, Suit.Hearts),
-				new Card(Rank.Six, Suit.Spades),
-				new Card(Rank.Queen, Suit.Hearts),
+				new Card(Rank.Six, Suit.Spades),				
 				},
 				new List<Card>()
 				{
+				new Card(Rank.King, Suit.Hearts),
 				new Card(Rank.Ace, Suit.Spades),
 				new Card(Rank.Five, Suit.Clubs),
-				new Card(Rank.King, Suit.Hearts),
 				},
 				new List<Card> {new Card(Rank.Queen, Suit.Hearts)}
 			).SetName("Card Could Not Be Moved From Stock To Tableau");
@@ -436,6 +437,7 @@ namespace Solitaire.Domain.Test
 
 			//Act
 			board.InitializeStock(initialStockCards);
+			stock.GetOpenCards();
 			stock.CheckRankAndSuitInStockAndTableau(cardToBeMoved, tableauPile);
 
 			//Assert

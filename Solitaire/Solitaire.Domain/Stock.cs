@@ -32,13 +32,11 @@ namespace Solitaire.Domain
 
 		public List<Card> GetOpenCards()
 		{
-			OpenCards.Add(StockCards.First());
-
-			if(CardCanBeMoved)
+			if (StockCards.Any())
 			{
-				OpenCards.Remove(OpenCards.First());
+				OpenCards.Add(StockCards.First());
 			}
-	
+
 			return OpenCards;
 		}
 
@@ -65,7 +63,7 @@ namespace Solitaire.Domain
 		{
 			if (tableauPile.Any())
 			{
-				var openCardFromTargetPile = tableauPile.Last();
+				var openCardFromTargetPile = tableauPile.First();
 
 				if (openCardFromTargetPile.Rank - cardToBeMoved.Rank == 1)
 				{
@@ -78,12 +76,10 @@ namespace Solitaire.Domain
 					}
 
 					else
-						OpenCards.Add(cardToBeMoved);
 						Tableau.TableauPile3 = tableauPile;
 				}
 
 					else
-						OpenCards.Add(cardToBeMoved);
 						Tableau.TableauPile3 = tableauPile;
 			}
 		}
@@ -91,14 +87,14 @@ namespace Solitaire.Domain
 
 		public void MoveCardFromWasteToTableau(Card openStockCard, List<Card> tableauPile)
 		{
-			tableauPile.Add(openStockCard);
+			tableauPile.Insert(0,openStockCard);
 			StockCards.Remove(openStockCard);
 
 			Tableau.TableauPile3 = tableauPile;
 
 			CardCanBeMoved = true;
 
-			GetClosedCards();
+			OpenCards.Remove(OpenCards.First());
 		}
 	}
 }
