@@ -25,6 +25,11 @@ namespace Solitaire.Domain
 		{
 			Stock.Initialize(initialStockCards);
 		}
+
+		public void InitializeFoundation(List<Card> initialFoundationCards)
+		{
+			Foundation.Initialize(initialFoundationCards);
+		}
 	}
 }
 

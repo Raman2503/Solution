@@ -33,9 +33,12 @@ namespace Solitaire.Domain
 
 		public void Initialize(List<Card> initialFoundationCards)
 		{
-			foreach (var card in initialFoundationCards)
+			if (initialFoundationCards.Any())
 			{
-				MoveCardToFoundation(card);
+				foreach (var card in initialFoundationCards)
+				{
+					MoveCardToFoundation(card);
+				}
 			}
 		}
 

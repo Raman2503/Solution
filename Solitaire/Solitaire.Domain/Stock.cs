@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Solitaire.Domain
@@ -18,9 +19,12 @@ namespace Solitaire.Domain
 
 		Tableau Tableau { get; set; }
 
-		public Stock(Tableau tableau)
+		Foundation Foundation { get; set; }
+
+		public Stock(Tableau tableau, Foundation foundation)
 		{
 			Tableau = tableau;
+			Foundation = foundation;
 		}
 
 		public void Initialize(List<Card> initialCards)
@@ -88,13 +92,51 @@ namespace Solitaire.Domain
 			}
 		}
 
-
 		public void MoveCardFromWasteToTableau(Card openStockCard, List<Card> tableauPile)
 		{
 			tableauPile.Insert(0,openStockCard);
 			StockCards.Remove(openStockCard);
 
 			Tableau.TableauPile3 = tableauPile;
+
+			CardCanBeMoved = true;
+
+			OpenCards.Remove(OpenCards.First());
+		}
+
+		public void CheckRankAndSuitInStockAndFoundation(Card cardToBeMoved, List<Card> foundationPiles)
+		{
+			if (foundationPiles.Any())
+			{
+					switch (cardToBeMoved.Suit)
+				{
+					case Suit.Clubs:
+						if (cardToBeMoved.Rank - Foundation.FoundationPileClubs.First().Rank == 1)
+							MoveCardFromWasteToFoundation(cardToBeMoved);
+							
+						break;
+					case Suit.Diamonds:
+						if (cardToBeMoved.Rank - Foundation.FoundationPileDiamonds.First().Rank == 1)
+							MoveCardFromWasteToFoundation(cardToBeMoved);
+						break;
+					case Suit.Hearts:
+						if (cardToBeMoved.Rank - Foundation.FoundationPileHearts.First().Rank == 1)
+							MoveCardFromWasteToFoundation(cardToBeMoved);
+						break;
+					case Suit.Spades:
+						if (cardToBeMoved.Rank - Foundation.FoundationPileSpades.First().Rank == 1)
+							MoveCardFromWasteToFoundation(cardToBeMoved);
+						break;
+					default:
+						throw new ArgumentOutOfRangeException();
+				}
+			}
+		}
+
+		private void MoveCardFromWasteToFoundation(Card cardToBeMoved)
+		{
+			Foundation.MoveCardToFoundation(cardToBeMoved);
+			StockCards.Remove(cardToBeMoved);
 
 			CardCanBeMoved = true;
 
