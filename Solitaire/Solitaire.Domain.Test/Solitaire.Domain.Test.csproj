@@ -54,7 +54,6 @@
   <ItemGroup>
     <Compile Include="CreateCardDeckTest.cs" />
     <Compile Include="CardTests.cs" />
-    <Compile Include="Playground.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StockTests.cs" />
     <Compile Include="FoundationTests.cs" />
