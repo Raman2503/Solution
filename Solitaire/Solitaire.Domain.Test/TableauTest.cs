@@ -220,7 +220,9 @@ namespace Solitaire.Domain.Test
 		)
 		{
 			//Arrange
-			Tableau tableau = new Tableau();
+			Foundation foundation = new Foundation();
+
+			Tableau tableau = new Tableau(foundation);
 
 			//Act
 			tableau.Initialize(initialTableauPiles);
@@ -241,7 +243,9 @@ namespace Solitaire.Domain.Test
 		public void ASd()
 		{
 			//Arrange
-			Tableau tableau = new Tableau();
+			Foundation foundation = new Foundation();
+
+			Tableau tableau = new Tableau(foundation);
 
 
 			tableau.Initialize(new List<List<Card>>());

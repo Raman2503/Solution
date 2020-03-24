@@ -18,6 +18,12 @@ namespace Solitaire.Domain
 
 		public Card OpenCard { get; set; }
 
+		Foundation Foundation { get; set; }
+
+		public Tableau(Foundation foundation)
+		{
+			Foundation = foundation;
+		}
 
 		/// <summary>
 		/// This method initializes the respective pile on the tableau.
@@ -105,6 +111,54 @@ namespace Solitaire.Domain
 
 				OpenCard = pPile3.First();		
 		}
+
+		// Moving cards from tableau to foundation
+		public void CheckRankAndSuitInTableauAndFoundation(Card cardToBeMoved, List<Card> foundationPiles, List<Card> tableauPile)
+		{
+			if (foundationPiles.Any())
+			{
+				switch (cardToBeMoved.Suit)
+				{
+					case Suit.Clubs:
+						if (cardToBeMoved.Rank - Foundation.FoundationPileClubs.First().Rank == 1)
+							MoveCardFromTableauToFoundation(cardToBeMoved, tableauPile);
+						break;
+					case Suit.Diamonds:
+						if (cardToBeMoved.Rank - Foundation.FoundationPileDiamonds.First().Rank == 1)
+							MoveCardFromTableauToFoundation(cardToBeMoved, tableauPile);
+						break;
+					case Suit.Hearts:
+						if (cardToBeMoved.Rank - Foundation.FoundationPileHearts.First().Rank == 1)
+							MoveCardFromTableauToFoundation(cardToBeMoved, tableauPile);
+						break;
+					case Suit.Spades:
+						if (cardToBeMoved.Rank - Foundation.FoundationPileSpades.First().Rank == 1)
+							MoveCardFromTableauToFoundation(cardToBeMoved, tableauPile);
+						break;
+					default:
+						throw new ArgumentOutOfRangeException();
+				}
+
+				if(CardCanBeMoved == false)
+				{
+					TableauPile3 = tableauPile;
+					OpenCard = cardToBeMoved;
+				}
+			}
+		}
+
+		void MoveCardFromTableauToFoundation(Card pCardToBeMoved, List<Card> pPile3)
+		{
+			Foundation.MoveCardToFoundation(pCardToBeMoved);
+			pPile3.Remove(pCardToBeMoved);
+
+			TableauPile3 = pPile3;
+
+			CardCanBeMoved = true;
+
+			OpenCard = pPile3.First();
+		}
+
 	}
 }
  		

@@ -311,8 +311,9 @@ namespace Solitaire.Domain.Test
 			Card expectedOpenCard)
 		{
 			//Arrange
-			Tableau tableau = new Tableau();
 			Foundation foundation = new Foundation();
+
+			Tableau tableau = new Tableau(foundation);
 			Stock stock = new Stock(tableau, foundation);
 
 			Board board = new Board(tableau, foundation, stock);
@@ -429,8 +430,9 @@ namespace Solitaire.Domain.Test
 				List<Card> expectedOpenCards)
 		{
 			//Arrange
-			Tableau tableau = new Tableau();
 			Foundation foundation = new Foundation();
+
+			Tableau tableau = new Tableau(foundation);
 
 			Stock stock = new Stock(tableau, foundation);
 
@@ -565,8 +567,9 @@ namespace Solitaire.Domain.Test
 				List<Card> expectedSpades)
 		{
 			//Arrange
-			Tableau tableau = new Tableau();
 			Foundation foundation = new Foundation();
+
+			Tableau tableau = new Tableau(foundation);
 
 			Stock stock = new Stock(tableau,foundation);
 
@@ -635,8 +638,9 @@ namespace Solitaire.Domain.Test
 			)
 		{
 			//Arrange
-			Tableau tableau = new Tableau();
 			Foundation foundation = new Foundation();
+
+			Tableau tableau = new Tableau(foundation);
 
 			Stock stock = new Stock(tableau, foundation);
 
@@ -653,6 +657,134 @@ namespace Solitaire.Domain.Test
 
 			if(stock.StockCards.Count != 0)
 			Assert.AreEqual(expectedOpenCards[0], stock.StockCards[1]);
+		}
+
+
+		public IEnumerable<TestCaseData> MoveCardsFromTableauToFoundationTestCases
+		{
+			get
+			{
+				yield return new TestCaseData(
+					new List<Card> { },
+					null,
+					new List<Card> { },
+					new List<Card> { },
+					null,
+					new List<Card> { },
+					new List<Card> { },
+					new List<Card> { },
+					new List<Card> { }
+			).SetName("Empty Tableau and Foundation");
+
+				yield return new TestCaseData(
+					null,
+					null,
+					null,
+					null,
+					null,
+					new List<Card> { },
+					new List<Card> { },
+					new List<Card> { },
+					new List<Card> { }
+			).SetName("Tableau and Foundation Null Case").Throws(typeof(ArgumentNullException));
+
+				yield return new TestCaseData(
+					new List<Card>
+					{
+					new Card(Rank.King, Suit.Diamonds),
+					new Card(Rank.Eight, Suit.Hearts),
+					new Card(Rank.Ace, Suit.Clubs),
+					},
+					new Card(Rank.King, Suit.Diamonds),
+					new List<Card>
+					{
+					new Card(Rank.Ace, Suit.Hearts),
+					new Card(Rank.Ten, Suit.Spades),
+					new Card(Rank.Queen, Suit.Diamonds),
+					new Card(Rank.Jack, Suit.Clubs)
+					},
+					new List<Card> {
+					new Card(Rank.Eight, Suit.Hearts),
+					new Card(Rank.Ace, Suit.Clubs),
+					},
+					new Card(Rank.Eight, Suit.Hearts),
+					new List<Card> {
+					new Card(Rank.Jack, Suit.Clubs)},
+					new List<Card> {
+					 new Card(Rank.Ace, Suit.Hearts)},
+					new List<Card> {
+					new Card(Rank.Queen, Suit.Diamonds),
+					new Card(Rank.King, Suit.Diamonds)
+					},
+					new List<Card> { new Card(Rank.Ten, Suit.Spades) }
+			).SetName("Card Can Be Moved From Tableau To Foundation");
+
+				yield return new TestCaseData(
+					new List<Card>
+					{
+					new Card(Rank.Seven, Suit.Diamonds),
+					new Card(Rank.Ace, Suit.Clubs),
+					new Card(Rank.Eight, Suit.Hearts),
+
+					},
+					new Card(Rank.Seven, Suit.Diamonds),
+					new List<Card>
+					{
+					new Card(Rank.Ace, Suit.Hearts),
+					new Card(Rank.Ten, Suit.Spades),
+					new Card(Rank.Queen, Suit.Diamonds),
+					new Card(Rank.Jack, Suit.Clubs)
+					},
+					new List<Card> {
+					new Card(Rank.Seven, Suit.Diamonds),
+					new Card(Rank.Ace, Suit.Clubs),
+					new Card(Rank.Eight, Suit.Hearts),
+					},
+					new Card(Rank.Seven, Suit.Diamonds),
+					new List<Card> {
+					new Card(Rank.Jack, Suit.Clubs)},
+					new List<Card> {
+					 new Card(Rank.Ace, Suit.Hearts)},
+					new List<Card> {
+					new Card(Rank.Queen, Suit.Diamonds),
+					},
+					new List<Card> { new Card(Rank.Ten, Suit.Spades) }
+			).SetName("Card Can Not Be Moved From Tableau To Foundation");
+			}
+		}
+		[Test]
+		[TestCaseSource(nameof(MoveCardsFromTableauToFoundationTestCases))]
+		public void MoveCardsFromTableauToFoundationTest(List<Card> tableauPileCards,
+				Card cardToBeMoved,
+				List<Card> initialFoundationCards,
+				List<Card> expectedTableauPileCards,
+				Card expectedOpenTableauCard,
+				List<Card> expectedClubs,
+				List<Card> expectedHearts,
+				List<Card> expectedDiamonds,
+				List<Card> expectedSpades)
+		{
+			//Arrange
+			Foundation foundation = new Foundation();
+
+			Tableau tableau = new Tableau(foundation);
+
+			Stock stock = new Stock(tableau, foundation);
+
+			Board board = new Board(tableau, foundation, stock);
+
+			//Act
+			board.InitializeFoundation(initialFoundationCards);
+			tableau.CheckRankAndSuitInTableauAndFoundation(cardToBeMoved, initialFoundationCards, tableauPileCards);
+
+			//Assert
+			CollectionAssert.AreEqual(expectedTableauPileCards, tableau.TableauPile3);
+			CollectionAssert.AreEqual(expectedClubs, foundation.FoundationPileClubs);
+			CollectionAssert.AreEqual(expectedDiamonds, foundation.FoundationPileDiamonds);
+			CollectionAssert.AreEqual(expectedHearts, foundation.FoundationPileHearts);
+			CollectionAssert.AreEqual(expectedSpades, foundation.FoundationPileSpades);
+
+			Assert.AreEqual(expectedOpenTableauCard, tableau.OpenCard);
 		}
 	}
 }

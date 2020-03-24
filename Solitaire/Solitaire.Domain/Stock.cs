@@ -30,10 +30,9 @@ namespace Solitaire.Domain
 		/// Initialize stock 
 		public void Initialize(List<Card> initialCards)
 		{
-			_ = initialCards ?? throw new System.ArgumentNullException(nameof(initialCards));
+			_ = initialCards ?? throw new ArgumentNullException(nameof(initialCards));
 
 				StockCards.AddRange(initialCards);
-	
 		}
 
 		/// Getting open and closed cards of waste

@@ -11,9 +11,9 @@ namespace Solitaire.Domain.Test
         public void StockInitializeTest()
         {
 			//Arrange
-			Tableau tableau = new Tableau();
-
 			Foundation foundation = new Foundation();
+
+			Tableau tableau = new Tableau(foundation);
 
             Stock stock = new Stock(tableau,foundation);
 
@@ -47,10 +47,11 @@ namespace Solitaire.Domain.Test
         public void DrawNewCardTest()
         {
 			//Arrange
-			Tableau tableau = new Tableau();
 			Foundation foundation = new Foundation();
 
-            Stock stock = new Stock(tableau,foundation);
+			Tableau tableau = new Tableau(foundation);
+
+			Stock stock = new Stock(tableau,foundation);
 
             List<Card> initialCards = new List<Card>()
             {
