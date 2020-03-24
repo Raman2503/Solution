@@ -78,34 +78,5 @@ namespace Solitaire.Domain.Test
 			Assert.AreEqual(initialCards[2], closedCards[0]);
 			Assert.AreEqual(initialCards.Last(), closedCards[2]);
         }
-
-		[Test]
-		// This test checks if the stock pile contains 24 cards and outputs the cards on the console.
-		public void CheckNumberOfCompleteCardsInStock()
-		{
-			//Arrange
-			Tableau tableau = new Tableau();
-			Foundation foundation = new Foundation();
-			Stock stock = new Stock(tableau,foundation);
-
-			CardDeck deck = new CardDeck();
-
-			CardDeckFactory df = new CardDeckFactory(deck);
-
-			df.GenerateDeck();
-
-			var completeStock = deck.Cards.Take(24).ToList();
-
-			//Act
-			var stockCards = stock.CreateCompleteStock(completeStock);
-
-			//Assert
-			Assert.AreEqual(24,stockCards.Count);
-
-			foreach (Card card in stock.StockCards)
-			{
-				Console.WriteLine(card.ToString());
-			}
-		}
 	}
 }

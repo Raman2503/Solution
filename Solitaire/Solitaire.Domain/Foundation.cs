@@ -31,6 +31,7 @@ namespace Solitaire.Domain
 			}
 		}
 
+		// Initialize foundation
 		public void Initialize(List<Card> initialFoundationCards)
 		{
 			if (initialFoundationCards.Any())
@@ -42,24 +43,25 @@ namespace Solitaire.Domain
 			}
 		}
 
+		// Moving cards to foundation and checking rank and suit beforehand
 		public void CheckRank(Card newCard)
 		{
 			switch (newCard.Suit)
 			{
 				case Suit.Clubs:
-					if (newCard.Rank - FoundationPileClubs.Last().Rank == 1)
+					if (newCard.Rank - FoundationPileClubs.First().Rank == 1)
 						MoveCardToFoundation(newCard);
 					break;
 				case Suit.Diamonds:
-					if (newCard.Rank - FoundationPileDiamonds.Last().Rank == 1)
+					if (newCard.Rank - FoundationPileDiamonds.First().Rank == 1)
 						MoveCardToFoundation(newCard);
 					break;
 				case Suit.Hearts:
-					if (newCard.Rank - FoundationPileHearts.Last().Rank == 1)
+					if (newCard.Rank - FoundationPileHearts.First().Rank == 1)
 						MoveCardToFoundation(newCard);
 					break;
 				case Suit.Spades:
-					if (newCard.Rank - FoundationPileSpades.Last().Rank == 1)
+					if (newCard.Rank - FoundationPileSpades.First().Rank == 1)
 						MoveCardToFoundation(newCard);
 					break;
 				default:

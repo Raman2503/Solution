@@ -124,7 +124,6 @@ namespace Solitaire.Domain.Test
 						new Card(Rank.Queen, Suit.Diamonds),
 						new Card(Rank.Two, Suit.Clubs)
 					},
-					false,
 					new Card(Rank.Two, Suit.Hearts),
 					new List<Card> { new Card(Rank.Two, Suit.Clubs) },
 					new List<Card>
@@ -145,7 +144,6 @@ namespace Solitaire.Domain.Test
 					new Card(Rank.Queen, Suit.Diamonds),
 					new Card(Rank.Two, Suit.Clubs)
 					},
-					false,
 					new Card(Rank.Six, Suit.Spades),
 					new List<Card> { new Card(Rank.Two, Suit.Clubs) },
 					new List<Card> { new Card(Rank.Ace, Suit.Hearts) },
@@ -161,7 +159,6 @@ namespace Solitaire.Domain.Test
 		[TestCaseSource(nameof(MoveCardToFoundationTestCases))]
 		public void MoveCardToFoundationTest(
 			List<Card> initialFoundationCards,
-			bool expectedIsEmpty,
 			Card newCard,
 			List<Card> expectedClubs,
 			List<Card> expectedHearts,

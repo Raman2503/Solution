@@ -27,6 +27,7 @@ namespace Solitaire.Domain
 			Foundation = foundation;
 		}
 
+		/// Initialize stock 
 		public void Initialize(List<Card> initialCards)
 		{
 			_ = initialCards ?? throw new System.ArgumentNullException(nameof(initialCards));
@@ -35,6 +36,7 @@ namespace Solitaire.Domain
 	
 		}
 
+		/// Getting open and closed cards of waste
 		public List<Card> GetOpenCards()
 		{
 			if (StockCards.Any())
@@ -52,6 +54,7 @@ namespace Solitaire.Domain
 			return ClosedCards;
 		}
 
+		// Drawinf new card from stock
 		public void DrawFromStock()
 		{
 			if (OpenCards.Any())
@@ -61,12 +64,8 @@ namespace Solitaire.Domain
 			}
 		}
 
-		public List<Card> CreateCompleteStock(List<Card> completeStock)
-		{
-			StockCards.AddRange(completeStock);
-			return StockCards;
-		}
 
+		/// Moving card from waste/stock to tableau
 		public void CheckRankAndSuitInStockAndTableau(Card cardToBeMoved, List <Card> tableauPile)
 		{
 			if (tableauPile.Any())
@@ -92,7 +91,7 @@ namespace Solitaire.Domain
 			}
 		}
 
-		public void MoveCardFromWasteToTableau(Card openStockCard, List<Card> tableauPile)
+		void MoveCardFromWasteToTableau(Card openStockCard, List<Card> tableauPile)
 		{
 			tableauPile.Insert(0,openStockCard);
 			StockCards.Remove(openStockCard);
@@ -104,6 +103,7 @@ namespace Solitaire.Domain
 			OpenCards.Remove(OpenCards.First());
 		}
 
+		/// Moving card from waste/stock to foundation
 		public void CheckRankAndSuitInStockAndFoundation(Card cardToBeMoved, List<Card> foundationPiles)
 		{
 			if (foundationPiles.Any())
